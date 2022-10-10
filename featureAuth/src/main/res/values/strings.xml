@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_screen_title">Bem-Vindo!</string>
+    <string name="login_scrin_call_to_action">Insira as informações de login abaixo</string>
+    <string name="login_invalid_credentials_message">Invalid login or password</string>
+    <string name="login_label">Login</string>
+    <string name="create_account_label">Create account</string>
+    <string name="login_create_account_error">Could not create account</string>
+    <string name="create_account_action">Preencha os campos abaixo para criar a sua conta</string>
+</resources>

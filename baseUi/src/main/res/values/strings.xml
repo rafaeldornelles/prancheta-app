@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_error_message">Algo deu errado: %s</string>
+    <string name="default_email">Email</string>
+    <string name="default_password">Password</string>
+    <string name="default_email_placeholder">email@example.com</string>
+    <string name="default_password_placeholder">******</string>
+    <string name="default_invalid_email_message">Invalid e-mail</string>
+    <string name="default_invalid_password_message">Password must contain at least 6 characters</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "984549599793",
+    "project_id": "prancheta-bcfc2",
+    "storage_bucket": "prancheta-bcfc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984549599793:android:85c589c171379811754310",
+        "android_client_info": {
+          "package_name": "com.rafael.prancheta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984549599793-9ndi0id88boi1ht3vtl6vergk5dleknr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZXLfYmX1rtLYCrA74goTAQNk7-4vNqbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984549599793-9ndi0id88boi1ht3vtl6vergk5dleknr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
