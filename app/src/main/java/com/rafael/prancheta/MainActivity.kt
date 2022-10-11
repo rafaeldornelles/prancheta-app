@@ -3,20 +3,12 @@ package com.rafael.prancheta
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
+import com.rafael.core.common.Routes
 import com.rafael.featureauth.presentation.navigation.AuthRoutes
-import com.rafael.featureauth.presentation.navigation.GRAPH_ROUTE
 import com.rafael.featureauth.presentation.navigation.authGraph
 import com.rafael.prancheta.ui.theme.PranchetaTheme
 
@@ -34,18 +26,19 @@ class MainActivity : ComponentActivity() {
                         navController.navigate(AuthRoutes.Login.route) {
                             popUpTo(0)
                         }
-                    }else {
-                        navController.navigate("logged") {
+                    } else {
+                        navController.navigate(HomeRoutes.GRAPH_ROUTE) {
                             popUpTo(0)
                         }
                     }
                 }
-               NavHost(navController = navController, startDestination = GRAPH_ROUTE) {
-                   authGraph(navController)
-                   composable("logged") {
-                       BottomNavigationScreen()
-                   }
-               }
+                NavHost(
+                    navController = navController,
+                    startDestination = if (auth.currentUser == null) AuthRoutes.GRAPH_ROUTE else HomeRoutes.GRAPH_ROUTE
+                ) {
+                    authGraph(navController)
+                    homeGraph(navController)
+                }
             }
         }
     }

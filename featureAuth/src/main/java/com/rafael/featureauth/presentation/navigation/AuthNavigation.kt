@@ -9,7 +9,7 @@ import com.rafael.featureauth.presentation.ui.CreateAccountScreen
 import com.rafael.featureauth.presentation.ui.LoginScreen
 
 fun NavGraphBuilder.authGraph(navController: NavController) {
-    navigation(startDestination = AuthRoutes.Login.route, route = GRAPH_ROUTE) {
+    navigation(startDestination = AuthRoutes.Login.route, route = AuthRoutes.GRAPH_ROUTE) {
         composable(AuthRoutes.Login.route) {
             LoginScreen(navController)
         }
@@ -19,9 +19,11 @@ fun NavGraphBuilder.authGraph(navController: NavController) {
     }
 }
 
-const val GRAPH_ROUTE = "auth"
-
 sealed class AuthRoutes (route: String) : Routes(route) {
     object Login: AuthRoutes("login")
     object CreateAccount: AuthRoutes("create-account")
+
+    companion object {
+        const val GRAPH_ROUTE = "auth"
+    }
 }

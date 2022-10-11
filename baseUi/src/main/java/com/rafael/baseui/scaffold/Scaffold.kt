@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.rafael.baseui.R
 import com.rafael.core.common.UiState
 
@@ -27,10 +28,12 @@ fun <T> Scaffold(
     topBar: @Composable () -> Unit = { TopAppBar() },
     loading: @Composable () -> Unit = { DefaultLoading() },
     error: @Composable (t: Throwable) -> Unit = { DefaultError(it) },
+    bottomBar: @Composable () -> Unit = {},
     success: @Composable (T) -> Unit
 ) {
     androidx.compose.material.Scaffold(
         topBar = topBar,
+        bottomBar = bottomBar
     ) { paddingValues ->
         val layoutDirection = LocalLayoutDirection.current
         val successAlpha by animateFloatAsState(targetValue = if (state is UiState.Success) 1f else 0f)
