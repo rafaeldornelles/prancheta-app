@@ -1,22 +1,24 @@
-package com.rafael.core.common
+package com.rafael.baseui.common
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<T> : ViewModel() {
-    var uiState: UiState<T> by mutableStateOf(UiState.Loading)
-        protected set
-
-    init {
-        viewModelScope.launch {
-            uiState = UiState.Success(getInitial())
+    private val _uiStateValue by lazy {
+        mutableStateOf(UiState.Loading as UiState<T>).apply {
+            viewModelScope.launch {
+                value = try {
+                    UiState.Success(getInitial())
+                } catch (e: Exception) {
+                    UiState.Error(e)
+                }
+            }
         }
     }
+    var uiState: UiState<T> get() = _uiStateValue.value
+        private set(value) { _uiStateValue.value = value }
 
     abstract suspend fun getInitial(): T
 

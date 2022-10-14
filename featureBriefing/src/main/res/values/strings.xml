@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send_briefing_client_name_label">Cliente</string>
+    <string name="send_briefing_client_name_placeholder">Nome do cliente</string>
+    <string name="send_briefing_client_email_label">E-mail</string>
+    <string name="send_briefing_client_email_placeholder">email@exemplo.com</string>
+</resources>

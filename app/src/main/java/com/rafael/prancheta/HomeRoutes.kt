@@ -1,16 +1,11 @@
 package com.rafael.prancheta
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -20,8 +15,9 @@ import com.rafael.baseui.scaffold.BottomBar
 import com.rafael.baseui.scaffold.BottomNavigationItem
 import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.core.common.Routes
-import com.rafael.core.common.UiState
+import com.rafael.baseui.common.UiState
 import com.rafael.featureauth.R
+import com.rafael.featurebriefing.presentation.ui.BriefingScreen
 
 fun NavGraphBuilder.homeGraph(navController: NavController) {
     val navigationitems = listOf(
@@ -34,15 +30,16 @@ fun NavGraphBuilder.homeGraph(navController: NavController) {
                 UiState.Success<Any>(Unit),
                 bottomBar = { BottomBar(navController = navController, items = navigationitems) }
             ) {
-                Text(text = "Projects")
+                Text(text = "Projects", style = MaterialTheme.typography.h4)
             }
         }
         composable(HomeRoutes.Briefing.route) {
             Scaffold(
                 UiState.Success<Any>(Unit),
-                bottomBar = { BottomBar(navController = navController, items = navigationitems) }
+                bottomBar = { BottomBar(navController = navController, items = navigationitems) },
+                topBar = {}
             ) {
-                Text(text = "Briefing")
+                BriefingScreen(navController = navController)
             }
         }
     }

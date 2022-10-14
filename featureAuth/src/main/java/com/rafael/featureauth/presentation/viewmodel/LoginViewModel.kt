@@ -1,15 +1,10 @@
 package com.rafael.featureauth.presentation.viewmodel
 
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.rafael.baseui.components.TextFieldState
-import com.rafael.core.common.BaseViewModel
+import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.R
 import com.rafael.baseui.components.ButtonState
 import com.rafael.core.common.Constants.PASSWORD_MIN_LENGTH

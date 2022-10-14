@@ -4,20 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.rafael.core.common.Routes
 import com.rafael.featureauth.presentation.navigation.AuthRoutes
 import com.rafael.featureauth.presentation.navigation.authGraph
-import com.rafael.prancheta.ui.theme.PranchetaTheme
+import com.rafael.featurebriefing.presentation.navigation.briefingGraph
+import com.rafael.baseui.theme.PranchetaTheme
 
 class MainActivity : ComponentActivity() {
 
     private val auth = FirebaseAuth.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Prancheta)
         setContent {
             PranchetaTheme {
                 val navController = rememberNavController()
@@ -38,6 +37,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     authGraph(navController)
                     homeGraph(navController)
+                    briefingGraph(navController)
                 }
             }
         }
