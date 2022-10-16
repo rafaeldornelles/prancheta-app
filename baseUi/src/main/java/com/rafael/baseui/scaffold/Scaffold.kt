@@ -1,10 +1,13 @@
 package com.rafael.baseui.scaffold
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -75,7 +78,14 @@ fun <T> Scaffold(
 
 @Composable
 fun DefaultLoading() {
-    CircularProgressIndicator()
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(MaterialTheme.spacing.x300),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        CircularProgressIndicator()
+    }
 }
 
 @Composable

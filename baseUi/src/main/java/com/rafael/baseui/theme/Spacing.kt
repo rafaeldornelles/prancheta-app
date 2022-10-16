@@ -10,10 +10,12 @@ import androidx.compose.ui.unit.dp
 
 @Immutable
 data class Spacing(
+    val x200: Dp,
     val x300: Dp
 ) {
     companion object {
         val default = Spacing(
+            x200 = 8.dp,
             x300 = 16.dp
         )
     }

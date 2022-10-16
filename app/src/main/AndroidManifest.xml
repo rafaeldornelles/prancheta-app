@@ -4,8 +4,8 @@
     package="com.rafael.prancheta">
 
     <application
-        android:allowBackup="true"
         android:name=".PranchetaApplication"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +23,22 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ClientActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PranchetaSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="prancheta.com"
+                    android:pathPrefix="/briefing/answer-briefing"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
     </application>

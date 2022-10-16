@@ -10,3 +10,17 @@ data class BriefingQuestion(
 enum class QuestionType {
     TEXT
 }
+
+data class BriefingQuestionSelection(
+    val question: BriefingQuestion,
+    val isSelected: Boolean
+)
+
+fun BriefingQuestion.toBriefingQuestionSelection() = BriefingQuestionSelection(
+    question = this,
+    isSelected = true
+)
+
+fun List<BriefingQuestion>.toBriefingQuestionsSelection() = this.map {
+    it.toBriefingQuestionSelection()
+}
