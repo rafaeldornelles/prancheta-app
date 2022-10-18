@@ -3,6 +3,7 @@ package com.rafael.featureauth.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.rafael.baseui.components.TextFieldState
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.R

@@ -10,10 +10,15 @@ import com.rafael.featureauth.presentation.navigation.AuthRoutes
 import com.rafael.featureauth.presentation.navigation.authGraph
 import com.rafael.featurebriefing.presentation.navigation.briefingGraph
 import com.rafael.baseui.theme.PranchetaTheme
+import com.rafael.core.cache.UserCache
+import org.koin.android.ext.android.inject
+import org.koin.androidx.compose.get
 
 class MainActivity : ComponentActivity() {
 
     private val auth = FirebaseAuth.getInstance()
+    private val userCache: UserCache by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Prancheta)
@@ -21,6 +26,7 @@ class MainActivity : ComponentActivity() {
             PranchetaTheme {
                 val navController = rememberNavController()
                 auth.addAuthStateListener {
+                    userCache.currentUserId = it.currentUser?.uid
                     if (it.currentUser == null) {
                         navController.navigate(AuthRoutes.Login.route) {
                             popUpTo(0)

@@ -2,6 +2,8 @@ package com.rafael.featurebriefing.data.mappers
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.ANSWER_KEY
+import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.ANSWER_TIME
+import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.ARCHITECT_ID
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.CLIENT_EMAIL_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.CLIENT_NAME_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.ID_KEY
@@ -18,9 +20,11 @@ import com.rafael.featurebriefing.domain.entity.QuestionType
 fun BriefingForm(doc: DocumentSnapshot) = BriefingForm(
     clientName = doc[CLIENT_NAME_KEY] as String,
     clientEmail = doc[CLIENT_EMAIL_KEY] as String,
+    architectId = doc[ARCHITECT_ID] as String,
     questions = (doc[QUESTIONS_KEY] as List<Map<String, Any>>).map {
         BriefingFormQuestion(it)
-    }
+    },
+    answerTime = doc[ANSWER_TIME] as? Long
 )
 
 private fun BriefingFormQuestion(map: Map<String, Any>) = BriefingFormQuestion(
@@ -42,9 +46,11 @@ private object BriefingFormKeys {
     const val CLIENT_EMAIL_KEY = "clientEmail"
     const val QUESTIONS_KEY = "questions"
     const val QUESTION_KEY = "question"
+    const val ARCHITECT_ID = "architectId"
     const val ID_KEY = "id"
     const val QUESTION_TYPE_KEY = "questionType"
     const val LABEL_KEY = "label"
     const val ANSWER_KEY = "answer"
     const val ORDER_KEY = "order"
+    const val ANSWER_TIME = "answerTime"
 }

@@ -1,10 +1,14 @@
 package com.rafael.prancheta
 
 import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import com.rafael.core.cache.UserCache
 import com.rafael.featureauth.di.authModule
 import com.rafael.featurebriefing.di.briefingModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.dsl.module
 
 class PranchetaApplication : Application() {
     override fun onCreate() {
@@ -12,9 +16,15 @@ class PranchetaApplication : Application() {
         startKoin {
             androidContext(this@PranchetaApplication)
             modules(
+                applicationModule,
                 authModule,
                 briefingModule
             )
         }
     }
+}
+
+val applicationModule = module {
+    single<SharedPreferences> { androidContext().getSharedPreferences("prancheta", MODE_PRIVATE) }
+    single { UserCache(get()) }
 }

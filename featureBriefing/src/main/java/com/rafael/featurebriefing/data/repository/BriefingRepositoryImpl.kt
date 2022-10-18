@@ -27,10 +27,11 @@ class BriefingRepositoryImpl : BriefingRepository {
     override suspend fun sendBriefing(
         clientName: String,
         clientEmail: String,
+        architectId: String,
         questions: List<BriefingQuestion>
     ) {
         val briefingForm = BriefingForm(
-            clientName, clientEmail, questions.map { BriefingFormQuestion(it) }
+            clientName, clientEmail, architectId, questions.map { BriefingFormQuestion(it) }
         )
         db.collection(BRIEFING_FORMS).add(briefingForm).await()
     }
@@ -38,6 +39,10 @@ class BriefingRepositoryImpl : BriefingRepository {
     override suspend fun getForm(formId: String): BriefingForm? {
         val doc = db.collection(BRIEFING_FORMS).document(formId).get().await()
         return  BriefingForm(doc)
+    }
+
+    override suspend fun updateBriefing(formId: String, form: BriefingForm) {
+        db.collection(BRIEFING_FORMS).document(formId).set(form)
     }
 
     companion object {

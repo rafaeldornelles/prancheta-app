@@ -3,7 +3,9 @@ package com.rafael.featurebriefing.domain.entity
 data class BriefingForm (
     val clientName: String,
     val clientEmail: String,
-    val questions: List<BriefingFormQuestion>
+    val architectId: String,
+    val questions: List<BriefingFormQuestion>,
+    val answerTime: Long? = null
 )
 
 data class BriefingFormQuestion(

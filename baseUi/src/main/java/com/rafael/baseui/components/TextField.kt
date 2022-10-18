@@ -38,26 +38,53 @@ fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onValueChange: (String) -> Unit
 ) {
+    TextField(
+        modifier = modifier,
+        value = state.value,
+        label = stringResource(id = state.label),
+        placeholder = stringResource(id = state.placeholder),
+        validator = state.validator,
+        errorDebounce = state.errorDebounce,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        onValueChange = onValueChange
+    )
+}
+
+@Composable
+fun TextField(
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    value: String,
+    label: String,
+    placeholder: String,
+    validator: (@StringRes (String) -> Int?)? = null,
+    errorDebounce: Long = DEFAULT_DEBOUNCE,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    onValueChange: (String) -> Unit
+) {
     var debouncedError by remember {
-        mutableStateOf(if (state.value.isNotEmpty()) state.validator?.invoke(state.value) else null)
+        mutableStateOf(if (value.isNotEmpty()) validator?.invoke(value) else null)
     }
 
-    LaunchedEffect(state.value) {
-        delay(state.errorDebounce)
-        if (state.value.isNotEmpty()) {
-            debouncedError = state.validator?.invoke(state.value)
+    LaunchedEffect(value) {
+        delay(errorDebounce)
+        if (value.isNotEmpty()) {
+            debouncedError = validator?.invoke(value)
         }
     }
 
     Column {
         OutlinedTextField(
             modifier = modifier,
-            value = state.value,
+            value = value,
             label = {
-                Text(text = stringResource(id = state.label))
+                Text(text = label)
             },
             placeholder = {
-                Text(text = stringResource(id = state.placeholder))
+                Text(text = placeholder)
             },
             isError = debouncedError != null,
             visualTransformation = visualTransformation,
