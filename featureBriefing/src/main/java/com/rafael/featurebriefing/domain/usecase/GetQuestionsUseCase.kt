@@ -8,7 +8,7 @@ class GetQuestionsUseCase(
 ) {
     suspend operator fun invoke() : Result<List<BriefingQuestion>> {
         return try {
-            Result.success(repository.getDefaultQuestions())
+            Result.success(repository.getDefaultQuestions().sortedBy { it.order })
         } catch (e: Exception) {
             Result.failure(e)
         }

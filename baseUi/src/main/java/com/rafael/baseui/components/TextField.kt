@@ -36,7 +36,9 @@ fun TextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null
 ) {
     TextField(
         modifier = modifier,
@@ -48,7 +50,9 @@ fun TextField(
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon
     )
 }
 
@@ -57,13 +61,15 @@ fun TextField(
     modifier: Modifier = Modifier.fillMaxWidth(),
     value: String,
     label: String,
-    placeholder: String,
+    placeholder: String?,
     validator: (@StringRes (String) -> Int?)? = null,
     errorDebounce: Long = DEFAULT_DEBOUNCE,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null
 ) {
     var debouncedError by remember {
         mutableStateOf(if (value.isNotEmpty()) validator?.invoke(value) else null)
@@ -84,7 +90,7 @@ fun TextField(
                 Text(text = label)
             },
             placeholder = {
-                Text(text = placeholder)
+                Text(text = placeholder.orEmpty())
             },
             isError = debouncedError != null,
             visualTransformation = visualTransformation,
@@ -95,7 +101,9 @@ fun TextField(
                 onValueChange(it.replace("\n", ""))
             },
             singleLine = true,
-            maxLines = 1
+            maxLines = 1,
+            leadingIcon = leadingIcon,
+            trailingIcon = trailingIcon
         )
         AnimatedVisibility(debouncedError != null) {
             Text(

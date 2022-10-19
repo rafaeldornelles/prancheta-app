@@ -1,5 +1,6 @@
 package com.rafael.featurebriefing.presentation.viewmodel
 
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.lifecycle.viewModelScope
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.components.ButtonState

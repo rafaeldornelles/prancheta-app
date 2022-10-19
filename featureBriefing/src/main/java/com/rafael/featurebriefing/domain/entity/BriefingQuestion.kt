@@ -4,11 +4,15 @@ data class BriefingQuestion(
     val id: String,
     val questionType: QuestionType,
     val label: String,
-    val order: Int
+    val order: Int,
+    val placeholder: String?,
+    val trailingText: String?,
+    val options: List<String>?,
+    val optionsUrl: List<String>?
 )
 
 enum class QuestionType {
-    TEXT
+    TEXT, NUMBER, CURRENCY, RADIO, RADIOIMAGE, CHECKBOX
 }
 
 data class BriefingQuestionSelection(
