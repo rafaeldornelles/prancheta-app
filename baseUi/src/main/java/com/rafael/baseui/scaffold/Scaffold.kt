@@ -3,6 +3,7 @@ package com.rafael.baseui.scaffold
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -11,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -26,15 +29,20 @@ import com.rafael.baseui.theme.spacing
 @Composable
 fun <T> Scaffold(
     state: UiState<T>,
-    topBar: @Composable () -> Unit = { TopAppBar() },
+    topBar: @Composable (ScaffoldState) -> Unit = { TopAppBar(it) },
     loading: @Composable () -> Unit = { DefaultLoading() },
     error: @Composable (t: Throwable) -> Unit = { DefaultError(it) },
     bottomBar: @Composable () -> Unit = {},
+    drawerContent: @Composable ColumnScope.() -> Unit = { DefaultDrawer()},
     success: @Composable (T) -> Unit
 ) {
+    val scaffoldState = rememberScaffoldState()
     androidx.compose.material.Scaffold(
-        topBar = topBar,
-        bottomBar = bottomBar
+        topBar = { topBar(scaffoldState) },
+        bottomBar = bottomBar,
+        drawerContent = drawerContent,
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        scaffoldState = scaffoldState
     ) { paddingValues ->
         val layoutDirection = LocalLayoutDirection.current
         val successAlpha by animateFloatAsState(targetValue = if (state is UiState.Success) 1f else 0f)

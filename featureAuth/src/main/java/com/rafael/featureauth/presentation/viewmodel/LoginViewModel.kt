@@ -3,7 +3,6 @@ package com.rafael.featureauth.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.rafael.baseui.components.TextFieldState
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.R
@@ -74,7 +73,9 @@ class LoginViewModel : BaseViewModel<LoginUiState>() {
                 try {
                     auth.signInWithEmailAndPassword(email, password).await()
                 } catch (e: FirebaseAuthException) {
-                    _action.postEvent(LoginAction.LoginError)
+                    _action.postEvent(LoginAction.LoginAuthError)
+                } catch (e: Exception) {
+                    _action.postEvent(LoginAction.LoginGenericError)
                 }
                 setButtonLoading(false)
             }
@@ -90,7 +91,7 @@ class LoginViewModel : BaseViewModel<LoginUiState>() {
                 try {
                     auth.createUserWithEmailAndPassword(email, password).await()
                 } catch (e: FirebaseAuthException) {
-                    _action.postEvent(LoginAction.LoginError)
+                    _action.postEvent(LoginAction.LoginAuthError)
                 }
                 setButtonLoading(false)
             }
@@ -113,5 +114,6 @@ fun LoginUiState.isButtonEnabled(
 }
 
 sealed class LoginAction {
-    object LoginError : LoginAction()
+    object LoginAuthError : LoginAction()
+    object LoginGenericError : LoginAction()
 }

@@ -2,9 +2,11 @@ package com.rafael.baseui.components
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -105,10 +107,14 @@ fun TextField(
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon
         )
-        AnimatedVisibility(debouncedError != null) {
-            Text(
-                text = debouncedError?.let { stringResource(id = it) } ?: ""
-            )
+        Column(modifier = Modifier.height(20.dp)) {
+            AnimatedVisibility(debouncedError != null) {
+                Text(
+                    text = debouncedError?.let { stringResource(id = it) } ?: "",
+                    style = MaterialTheme.typography.subtitle2,
+                    color = MaterialTheme.colors.error
+                )
+            }
         }
     }
 }

@@ -2,9 +2,10 @@
 <resources>
     <string name="login_screen_title">Bem-Vindo!</string>
     <string name="login_scrin_call_to_action">Insira as informações de login abaixo</string>
-    <string name="login_invalid_credentials_message">Invalid login or password</string>
+    <string name="login_invalid_credentials_message">Login ou senha inválidos</string>
+    <string name="login_generic_eeor__message">Algo deu errado, tente novamente mais tarde</string>
     <string name="login_label">Login</string>
-    <string name="create_account_label">Create account</string>
-    <string name="login_create_account_error">Could not create account</string>
+    <string name="create_account_label">Criar Conta</string>
+    <string name="login_create_account_error">Não foi possível criar conta</string>
     <string name="create_account_action">Preencha os campos abaixo para criar a sua conta</string>
 </resources>

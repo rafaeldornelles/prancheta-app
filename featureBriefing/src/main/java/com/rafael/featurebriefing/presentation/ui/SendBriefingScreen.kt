@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +22,10 @@ fun SendBriefingScreen(
 ) {
     Scaffold(state = viewModel.uiState) { state ->
         Column(Modifier.verticalScroll(rememberScrollState())) {
-            Text(text = "Send Briefing", style = MaterialTheme.typography.h4)
-            Text(text = "Dados do cliente")
+            Text(text = "Enviar Briefing", style = MaterialTheme.typography.h4)
+            Text(text = "Preencha o formulário para enviar o briefing para o cliente.")
+            Divider()
+            Text(text = "1. Dados do cliente")
             TextField(
                 state = state.clientNameState,
                 onValueChange = {}
@@ -30,7 +33,8 @@ fun SendBriefingScreen(
             TextField(
                 state = state.clientEmailState,
                 onValueChange = {})
-            Text(text = "Perguntas a serem enviadas")
+            Divider()
+            Text(text = "2. Selecione as perguntas a serem enviadas")
             state.questions.forEach { q ->
                 SelectionItem(
                     isSelected = q.isSelected,

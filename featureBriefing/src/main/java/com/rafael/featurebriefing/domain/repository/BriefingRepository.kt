@@ -8,4 +8,5 @@ interface BriefingRepository {
     suspend fun sendBriefing(clientName: String, clientEmail: String, architectId: String, questions: List<BriefingQuestion>)
     suspend fun getForm(formId: String) : BriefingForm?
     suspend fun updateBriefing(formId: String, form: BriefingForm)
+    suspend fun getBriefings(userId: String): List<BriefingForm>
 }

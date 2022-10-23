@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,11 +25,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rafael.baseui.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun TopAppBar(
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
     title: String? = null,
-    actions: List<TopAppBarAction> = emptyList()
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+    actions: List<TopAppBarAction> = listOf(
+        TopAppBarAction("Options", Icons.Outlined.Settings) {
+            coroutineScope.launch {
+                scaffoldState.drawerState.open()
+            }
+        }
+    )
 ) {
     TopAppBar(
         backgroundColor = Color.Transparent,

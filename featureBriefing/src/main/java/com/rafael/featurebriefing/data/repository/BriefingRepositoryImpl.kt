@@ -45,8 +45,14 @@ class BriefingRepositoryImpl : BriefingRepository {
         db.collection(BRIEFING_FORMS).document(formId).set(form)
     }
 
+    override suspend fun getBriefings(userId: String): List<BriefingForm> {
+        val doc = db.collection(BRIEFING_FORMS).whereEqualTo(ARCHITECT_ID_KEY, userId).get().await()
+        return doc.map { BriefingForm(it) }
+    }
+
     companion object {
         private const val DEFAULT_BRIEFING_QUESTIONS = "briefing_default_questions"
         private const val BRIEFING_FORMS = "briefing_forms"
+        private const val ARCHITECT_ID_KEY = "architectId"
     }
 }
