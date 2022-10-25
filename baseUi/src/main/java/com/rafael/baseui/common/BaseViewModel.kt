@@ -30,6 +30,10 @@ abstract class BaseViewModel<T> : ViewModel() {
         uiState = UiState.Success(value)
     }
 
+    fun setError(error: Throwable) {
+        uiState = UiState.Error(error)
+    }
+
     fun updateSuccess(block: (oldValue: T) -> T) {
         uiState.getOrNull()?.let {
             uiState = UiState.Success(block(it))

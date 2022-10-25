@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import com.rafael.baseui.components.Button
 import com.rafael.baseui.components.TextField
 import com.rafael.baseui.scaffold.Scaffold
+import com.rafael.baseui.scaffold.TopAppBar
 import com.rafael.baseui.theme.spacing
 import com.rafael.featureauth.R
 import com.rafael.featureauth.presentation.viewmodel.LoginAction
@@ -40,7 +41,7 @@ fun CreateAccountScreen(
     }
     Scaffold(
         state = viewModel.uiState,
-        topBar = {}
+        topBar = { TopAppBar(actions = emptyList(), title = {}, shouldShowBackButton = true) }
     ) { state ->
         Column(modifier = Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x700))

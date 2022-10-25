@@ -17,7 +17,7 @@ fun NavGraphBuilder.briefingGraph(
 ) {
     navigation(startDestination = BriefingRoutes.SendBriefing.route, route = BriefingRoutes.NAV_ROUTE) {
         composable(BriefingRoutes.SendBriefing.route) {
-            SendBriefingScreen()
+            SendBriefingScreen(navController)
         }
         composable("${BriefingRoutes.AnswerBriefing.route}?$BRIEFING_ID_ARG={$BRIEFING_ID_ARG}",
             deepLinks = listOf(navDeepLink { uriPattern = DEEPLINK_PATTERN }),

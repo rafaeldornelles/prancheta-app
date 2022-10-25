@@ -3,6 +3,8 @@ package com.rafael.prancheta
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -50,6 +52,7 @@ fun NavGraphBuilder.homeGraph(navController: NavController) {
                 bottomBar = { BottomBar(navController = navController, items = navigationitems) }
             ) {
                 Column {
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
                     Text(text = "Projetos", style = MaterialTheme.typography.h4)
                     HelperAlert(
                         text = "Você ainda não adiciou nenhum projeto. Faça um briefing antes de adicionar um projeto",

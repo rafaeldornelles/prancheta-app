@@ -40,7 +40,7 @@ fun HelperAlert(
             modifier = Modifier
                 .size(150.dp)
                 .clip(RoundedCornerShape(16.dp))
-                .background(MaterialTheme.colors.primary.copy(alpha = 0.2f))
+                .background(MaterialTheme.colors.primary.copy(alpha = 0.1f))
                 .padding(30.dp),
             imageVector = vector,
             contentDescription = null,

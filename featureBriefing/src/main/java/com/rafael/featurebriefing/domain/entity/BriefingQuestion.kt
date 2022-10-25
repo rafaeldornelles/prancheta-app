@@ -11,8 +11,8 @@ data class BriefingQuestion(
     val optionsUrl: List<String>?
 )
 
-enum class QuestionType {
-    TEXT, NUMBER, CURRENCY, RADIO, RADIOIMAGE, CHECKBOX
+enum class QuestionType(val questionLabel: String) {
+    TEXT("Texto"), NUMBER("Número"), CURRENCY("Quantidade monetária"), RADIO("Escolha Simples"), RADIOIMAGE("Escolha de imagens"), CHECKBOX("Escolha múltipla")
 }
 
 data class BriefingQuestionSelection(

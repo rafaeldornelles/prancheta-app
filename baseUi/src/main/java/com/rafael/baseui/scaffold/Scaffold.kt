@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import com.rafael.baseui.R
 import com.rafael.baseui.common.UiState
 import com.rafael.baseui.theme.spacing
@@ -34,6 +35,7 @@ fun <T> Scaffold(
     error: @Composable (t: Throwable) -> Unit = { DefaultError(it) },
     bottomBar: @Composable () -> Unit = {},
     drawerContent: @Composable ColumnScope.() -> Unit = { DefaultDrawer()},
+    horizontalPadding: Dp = MaterialTheme.spacing.x300,
     success: @Composable (T) -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -62,7 +64,7 @@ fun <T> Scaffold(
                 modifier = Modifier
                     .fillMaxSize()
                     .alpha(successAlpha)
-                    .padding(horizontal = MaterialTheme.spacing.x300)
+                    .padding(horizontal = horizontalPadding)
             ) {
                 state.getOrNull()?.let { success(it) }
             }

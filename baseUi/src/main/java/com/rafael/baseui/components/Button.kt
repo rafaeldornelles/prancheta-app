@@ -34,7 +34,7 @@ fun Button(
         elevation = ButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
         onClick = onClick
     ) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.heightIn(32.dp)) {
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.heightIn(40.dp)) {
             val contentAlpha by animateFloatAsState(targetValue = if (state.loading) 0f else 1f)
             if (state.loading) {
                 CircularProgressIndicator(color = MaterialTheme.colors.onPrimary)

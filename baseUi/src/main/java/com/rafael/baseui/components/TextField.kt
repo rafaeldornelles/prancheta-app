@@ -129,6 +129,8 @@ data class TextFieldState(
     fun withValue(value: String) = copy(value = value)
 }
 
+fun TextFieldState.isValidAndNotEmpty() = value.isNotEmpty() && validator?.invoke(value) == null
+
 @Composable
 @Preview
 private fun TextFieldPreview() {
