@@ -17,12 +17,13 @@ fun RadioItem(
     isSelected: Boolean,
     value: String,
     onSelectChange: (value: String) -> Unit,
+    alignment: Alignment.Vertical = Alignment.CenterVertically,
     content: @Composable () -> Unit
 ) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .clickable { onSelectChange(value) },
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = alignment
     ) {
         RadioButton(selected = isSelected, onClick = { onSelectChange(value) })
         Spacer(modifier = Modifier.width(MaterialTheme.spacing.x300))

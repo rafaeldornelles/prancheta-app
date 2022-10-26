@@ -10,6 +10,7 @@ import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.rafael.core.common.Routes
 import com.rafael.featurebriefing.presentation.ui.AnswerBriefingScren
+import com.rafael.featurebriefing.presentation.ui.BriefingSentScreen
 import com.rafael.featurebriefing.presentation.ui.SendBriefingScreen
 
 fun NavGraphBuilder.briefingGraph(
@@ -23,7 +24,10 @@ fun NavGraphBuilder.briefingGraph(
             deepLinks = listOf(navDeepLink { uriPattern = DEEPLINK_PATTERN }),
             arguments = listOf(navArgument(BRIEFING_ID_ARG) { type = NavType.StringType })
         ) { entry ->
-            AnswerBriefingScren(formId = entry.arguments?.getString(BRIEFING_ID_ARG).orEmpty())
+            AnswerBriefingScren(navController = navController, formId = entry.arguments?.getString(BRIEFING_ID_ARG).orEmpty())
+        }
+        composable(BriefingRoutes.BriefingSent.route) {
+            BriefingSentScreen()
         }
     }
 }
@@ -35,6 +39,7 @@ private const val DEEPLINK_PATTERN =
 sealed class BriefingRoutes(route: String) : Routes(route) {
     object SendBriefing : BriefingRoutes("send-briefing")
     object AnswerBriefing : BriefingRoutes("answer-briefing")
+    object BriefingSent: BriefingRoutes("briefing-sent")
 
     companion object {
         const val NAV_ROUTE = "briefing"
