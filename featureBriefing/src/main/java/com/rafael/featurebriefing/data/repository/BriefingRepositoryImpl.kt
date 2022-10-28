@@ -31,7 +31,7 @@ class BriefingRepositoryImpl : BriefingRepository {
         questions: List<BriefingQuestion>
     ) {
         val briefingForm = BriefingForm(
-            clientName, clientEmail, architectId, questions.map { BriefingFormQuestion(it) }
+            null, clientName, clientEmail, architectId, questions.map { BriefingFormQuestion(it) }
         )
         db.collection(BRIEFING_FORMS).add(briefingForm).await()
     }

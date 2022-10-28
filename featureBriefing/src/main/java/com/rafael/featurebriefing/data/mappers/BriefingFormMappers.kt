@@ -22,6 +22,7 @@ import com.rafael.featurebriefing.domain.entity.BriefingQuestion
 import com.rafael.featurebriefing.domain.entity.QuestionType
 
 fun BriefingForm(doc: DocumentSnapshot) = BriefingForm(
+    id = doc.id,
     clientName = doc[CLIENT_NAME_KEY] as String,
     clientEmail = doc[CLIENT_EMAIL_KEY] as String,
     architectId = doc[ARCHITECT_ID] as String,

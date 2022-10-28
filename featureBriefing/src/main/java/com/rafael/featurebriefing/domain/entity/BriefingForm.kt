@@ -1,6 +1,7 @@
 package com.rafael.featurebriefing.domain.entity
 
 data class BriefingForm (
+    val id: String? = null,
     val clientName: String,
     val clientEmail: String,
     val architectId: String,

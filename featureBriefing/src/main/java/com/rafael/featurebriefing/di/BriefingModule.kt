@@ -8,6 +8,7 @@ import com.rafael.featurebriefing.domain.usecase.GetFormUseCase
 import com.rafael.featurebriefing.domain.usecase.GetQuestionsUseCase
 import com.rafael.featurebriefing.domain.usecase.SendBriefingUseCase
 import com.rafael.featurebriefing.presentation.viewmodel.AnswerBriefingViewModel
+import com.rafael.featurebriefing.presentation.viewmodel.BriefingResultViewModel
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewData
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
 import com.rafael.featurebriefing.presentation.viewmodel.SendBriefingViewModel
@@ -28,4 +29,5 @@ val briefingModule = module {
     viewModel { SendBriefingViewModel(get(), get()) }
     viewModel { (formId: String) -> AnswerBriefingViewModel(formId, get(), get()) }
     viewModel { BriefingViewModel(get()) }
+    viewModel { (formId: String) -> BriefingResultViewModel(formId, get()) }
 }
