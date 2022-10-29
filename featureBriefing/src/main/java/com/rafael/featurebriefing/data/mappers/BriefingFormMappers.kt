@@ -12,6 +12,7 @@ import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.OPTIONS_FIELD
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.OPTIONS_URL_FIELD
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.ORDER_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.PLACEHOLDER_KEY
+import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.PROJECT_ID_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.QUESTIONS_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.QUESTION_KEY
 import com.rafael.featurebriefing.data.mappers.BriefingFormKeys.QUESTION_TYPE_KEY
@@ -29,7 +30,8 @@ fun BriefingForm(doc: DocumentSnapshot) = BriefingForm(
     questions = (doc[QUESTIONS_KEY] as List<Map<String, Any>>).map {
         BriefingFormQuestion(it)
     }.sortedBy { it.question.order },
-    answerTime = doc[ANSWER_TIME] as? Long
+    answerTime = doc[ANSWER_TIME] as? Long,
+    projectId = doc[PROJECT_ID_KEY] as? String
 )
 
 private fun BriefingFormQuestion(map: Map<String, Any>) = BriefingFormQuestion(
@@ -66,4 +68,5 @@ private object BriefingFormKeys {
     const val TRAILING_TEXT_FIELD = "trailingText"
     const val OPTIONS_FIELD = "options"
     const val OPTIONS_URL_FIELD = "optionsUrl"
+    const val PROJECT_ID_KEY = "projectId"
 }

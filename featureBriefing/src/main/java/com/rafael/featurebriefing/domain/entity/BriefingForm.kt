@@ -6,7 +6,8 @@ data class BriefingForm (
     val clientEmail: String,
     val architectId: String,
     val questions: List<BriefingFormQuestion>,
-    val answerTime: Long? = null
+    val answerTime: Long? = null,
+    val projectId: String? = null
 )
 
 data class BriefingFormQuestion(

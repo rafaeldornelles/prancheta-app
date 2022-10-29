@@ -11,8 +11,10 @@ import com.rafael.featureauth.presentation.navigation.authGraph
 import com.rafael.featurebriefing.presentation.navigation.briefingGraph
 import com.rafael.baseui.theme.PranchetaTheme
 import com.rafael.core.cache.UserCache
+import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -37,13 +39,14 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
+                val briefingViewModel: BriefingViewModel = getViewModel()
                 NavHost(
                     navController = navController,
                     startDestination = if (auth.currentUser == null) AuthRoutes.GRAPH_ROUTE else HomeRoutes.GRAPH_ROUTE
                 ) {
                     authGraph(navController)
-                    homeGraph(navController)
-                    briefingGraph(navController)
+                    homeGraph(navController, briefingViewModel)
+                    briefingGraph(navController, briefingViewModel)
                 }
             }
         }

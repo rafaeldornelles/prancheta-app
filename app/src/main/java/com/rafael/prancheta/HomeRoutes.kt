@@ -39,8 +39,13 @@ import com.rafael.baseui.components.HelperAlert
 import com.rafael.baseui.theme.spacing
 import com.rafael.featureauth.R
 import com.rafael.featurebriefing.presentation.ui.BriefingScreen
+import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
+import org.koin.androidx.compose.getViewModel
 
-fun NavGraphBuilder.homeGraph(navController: NavController) {
+fun NavGraphBuilder.homeGraph(
+    navController: NavController,
+    briefingViewModel: BriefingViewModel
+) {
     val navigationitems = listOf(
         HomeRoutes.Projects.toBottomItem(),
         HomeRoutes.Briefing.toBottomItem()
@@ -67,7 +72,7 @@ fun NavGraphBuilder.homeGraph(navController: NavController) {
                 bottomBar = { BottomBar(navController = navController, items = navigationitems) },
                 topBar = {}
             ) {
-                BriefingScreen(navController = navController)
+                BriefingScreen(navController = navController, viewModel = briefingViewModel)
             }
         }
     }

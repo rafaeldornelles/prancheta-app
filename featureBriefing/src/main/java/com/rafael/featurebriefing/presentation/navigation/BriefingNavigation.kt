@@ -13,16 +13,18 @@ import com.rafael.featurebriefing.presentation.ui.AnswerBriefingScren
 import com.rafael.featurebriefing.presentation.ui.BriefingResultScreen
 import com.rafael.featurebriefing.presentation.ui.BriefingSentScreen
 import com.rafael.featurebriefing.presentation.ui.SendBriefingScreen
+import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
 
 fun NavGraphBuilder.briefingGraph(
-    navController: NavController
+    navController: NavController,
+    briefingViewModel: BriefingViewModel
 ) {
     navigation(
         startDestination = BriefingRoutes.SendBriefing.route,
         route = BriefingRoutes.NAV_ROUTE
     ) {
         composable(BriefingRoutes.SendBriefing.route) {
-            SendBriefingScreen(navController)
+            SendBriefingScreen(navController, briefingViewModel =  briefingViewModel)
         }
         composable(
             "${BriefingRoutes.AnswerBriefing.route}?$BRIEFING_ID_ARG={$BRIEFING_ID_ARG}",

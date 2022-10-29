@@ -27,6 +27,7 @@ import com.rafael.baseui.components.SelectionItem
 import com.rafael.baseui.components.TextField
 import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.baseui.theme.spacing
+import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
 import com.rafael.featurebriefing.presentation.viewmodel.SendBriefingAction
 import com.rafael.featurebriefing.presentation.viewmodel.SendBriefingViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -36,6 +37,7 @@ import org.koin.androidx.compose.getViewModel
 fun SendBriefingScreen(
     navController: NavController,
     viewModel: SendBriefingViewModel = getViewModel(),
+    briefingViewModel: BriefingViewModel,
     context: Context = LocalContext.current
 ) {
     LaunchedEffect(key1 = Unit) {
@@ -44,6 +46,7 @@ fun SendBriefingScreen(
                 SendBriefingAction.BriefingSent -> {
                     Toast.makeText(context, "Briefing enviado com sucesso", Toast.LENGTH_SHORT)
                         .show()
+                    briefingViewModel.refresh()
                     navController.popBackStack()
                 }
                 is SendBriefingAction.Error -> {

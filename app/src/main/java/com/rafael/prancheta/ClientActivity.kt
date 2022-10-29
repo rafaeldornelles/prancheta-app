@@ -11,6 +11,7 @@ import com.rafael.featureauth.presentation.navigation.AuthRoutes
 import com.rafael.featureauth.presentation.navigation.authGraph
 import com.rafael.featurebriefing.presentation.navigation.BriefingRoutes
 import com.rafael.featurebriefing.presentation.navigation.briefingGraph
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class ClientActivity : ComponentActivity() {
@@ -27,7 +28,7 @@ class ClientActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = BriefingRoutes.NAV_ROUTE
                 ) {
-                    briefingGraph(navController)
+                    briefingGraph(navController, getViewModel())
                 }
             }
         }
