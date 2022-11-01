@@ -1,4 +1,4 @@
-package com.rafael.featurebriefing.domain.entity
+package com.rafael.core.model
 
 import androidx.annotation.Keep
 import java.util.*
@@ -8,6 +8,7 @@ data class Project(
     val id: String? = null,
     val clientName: String,
     val clientEmail: String,
-    val projectStart: Date,
+    val architectId: String,
+    val projectStart: Long,
     val briefing: BriefingForm
 )

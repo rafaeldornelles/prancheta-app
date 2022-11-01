@@ -1,10 +1,7 @@
 package com.rafael.featurebriefing.presentation.ui
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -47,17 +44,34 @@ fun BriefingResultScreen(
             items(it.form.questions) {
                 Column(Modifier.padding(top = MaterialTheme.spacing.x300)) {
                     Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.x300)) {
-                        Text(text = "Pergunta: ${it.question.label}", fontWeight = FontWeight.Medium)
-                        KeyValueText(key = "Tipo", value = it.question.questionType.questionLabel, modifier = Modifier.padding(top = MaterialTheme.spacing.x200))
+                        Text(
+                            text = "Pergunta: ${it.question.label}",
+                            fontWeight = FontWeight.Medium
+                        )
+                        KeyValueText(
+                            key = "Tipo",
+                            value = it.question.questionType.questionLabel,
+                            modifier = Modifier.padding(top = MaterialTheme.spacing.x200)
+                        )
                         if (it.question.options != null) {
-                            KeyValueText(key = "Opções", value = it.question.options.joinToString(", "), modifier = Modifier.padding(top = MaterialTheme.spacing.x200))
+                            KeyValueText(
+                                key = "Opções",
+                                value = it.question.options?.joinToString(", ").orEmpty(),
+                                modifier = Modifier.padding(top = MaterialTheme.spacing.x200)
+                            )
                         }
-                        KeyValueText(key = "Resposta", value = it.answer.orEmpty(), modifier = Modifier.padding(top = MaterialTheme.spacing.x200))
+                        KeyValueText(
+                            key = "Resposta",
+                            value = it.answer.orEmpty(),
+                            modifier = Modifier.padding(top = MaterialTheme.spacing.x200)
+                        )
                         if (it.question.optionsUrl != null) {
                             it.question.options?.indexOf(it.answer)?.let { i ->
                                 AsyncImage(
-                                    modifier = Modifier.height(100.dp).padding(vertical = MaterialTheme.spacing.x200),
-                                    model = it.question.optionsUrl[i],
+                                    modifier = Modifier
+                                        .height(100.dp)
+                                        .padding(vertical = MaterialTheme.spacing.x200),
+                                    model = it.question.optionsUrl?.get(i).orEmpty(),
                                     contentDescription = null
                                 )
                             }

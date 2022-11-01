@@ -8,8 +8,8 @@ import com.rafael.baseui.components.isValidAndNotEmpty
 import com.rafael.core.common.SingleShotEventBus
 import com.rafael.core.extensions.isValidEmail
 import com.rafael.featurebriefing.R
-import com.rafael.featurebriefing.domain.entity.BriefingQuestionSelection
-import com.rafael.featurebriefing.domain.entity.toBriefingQuestionsSelection
+import com.rafael.core.model.BriefingQuestionSelection
+import com.rafael.core.model.toBriefingQuestionsSelection
 import com.rafael.featurebriefing.domain.usecase.GetQuestionsUseCase
 import com.rafael.featurebriefing.domain.usecase.SendBriefingUseCase
 import kotlinx.coroutines.launch

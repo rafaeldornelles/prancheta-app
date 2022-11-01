@@ -49,6 +49,7 @@ android {
 dependencies {
     implementation project(":featureAuth")
     implementation project(":featureBriefing")
+    implementation project(":featureProject")
     implementation project(":core")
     implementation project(":baseUi")
 

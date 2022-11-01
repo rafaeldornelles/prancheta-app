@@ -1,7 +1,7 @@
 package com.rafael.featurebriefing.domain.repository
 
-import com.rafael.featurebriefing.domain.entity.BriefingForm
-import com.rafael.featurebriefing.domain.entity.BriefingQuestion
+import com.rafael.core.model.BriefingForm
+import com.rafael.core.model.BriefingQuestion
 
 interface BriefingRepository {
     suspend fun getDefaultQuestions(): List<BriefingQuestion>

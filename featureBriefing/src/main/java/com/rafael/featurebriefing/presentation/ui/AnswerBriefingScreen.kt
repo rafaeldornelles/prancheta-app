@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import com.rafael.baseui.components.Button
 import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.baseui.theme.spacing
-import com.rafael.featurebriefing.domain.entity.QuestionType
+import com.rafael.core.model.QuestionType
 import com.rafael.featurebriefing.presentation.components.CheckboxQuestion
 import com.rafael.featurebriefing.presentation.components.CurrencyQuestion
 import com.rafael.featurebriefing.presentation.components.NumberQuestion
@@ -30,7 +30,6 @@ import com.rafael.featurebriefing.presentation.components.TextQuestion
 import com.rafael.featurebriefing.presentation.navigation.BriefingRoutes
 import com.rafael.featurebriefing.presentation.viewmodel.AnswerBriefingAction
 import com.rafael.featurebriefing.presentation.viewmodel.AnswerBriefingViewModel
-import java.util.*
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf

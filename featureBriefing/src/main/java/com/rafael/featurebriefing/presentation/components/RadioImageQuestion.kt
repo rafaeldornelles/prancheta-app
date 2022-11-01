@@ -11,11 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import coil.compose.SubcomposeAsyncImage
 import com.rafael.baseui.components.RadioItem
 import com.rafael.baseui.theme.spacing
-import com.rafael.featurebriefing.domain.entity.BriefingFormQuestion
+import com.rafael.core.model.BriefingFormQuestion
 
 @Composable
 fun RadioImageQuestion(

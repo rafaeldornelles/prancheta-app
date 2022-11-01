@@ -1,16 +1,13 @@
 package com.rafael.featurebriefing.presentation.viewmodel
 
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.lifecycle.viewModelScope
-import com.google.type.DateTime
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.components.ButtonState
 import com.rafael.core.common.SingleShotEventBus
-import com.rafael.featurebriefing.domain.entity.BriefingForm
-import com.rafael.featurebriefing.domain.entity.QuestionType
+import com.rafael.core.model.BriefingForm
+import com.rafael.core.model.QuestionType
 import com.rafael.featurebriefing.domain.usecase.AnswerBriefingUseCase
 import com.rafael.featurebriefing.domain.usecase.GetFormUseCase
-import java.util.*
 import kotlinx.coroutines.launch
 
 class AnswerBriefingViewModel(

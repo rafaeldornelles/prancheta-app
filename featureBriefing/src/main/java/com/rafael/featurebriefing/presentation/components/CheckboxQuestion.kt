@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.rafael.baseui.components.SelectionItem
-import com.rafael.featurebriefing.domain.entity.BriefingFormQuestion
+import com.rafael.core.model.BriefingFormQuestion
 
 @Composable
 fun CheckboxQuestion(

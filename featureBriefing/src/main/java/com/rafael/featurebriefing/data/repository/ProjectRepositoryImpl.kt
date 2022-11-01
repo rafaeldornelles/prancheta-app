@@ -2,7 +2,7 @@ package com.rafael.featurebriefing.data.repository
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.rafael.featurebriefing.domain.entity.Project
+import com.rafael.core.model.Project
 import com.rafael.featurebriefing.domain.repository.ProjectRepository
 import kotlinx.coroutines.tasks.await
 
@@ -16,6 +16,7 @@ class ProjectRepositoryImpl : ProjectRepository {
     }
 
     companion object {
+        private const val USERS_COLLECTION = "users"
         private const val PROJECT_COLLECTION = "projects"
     }
 }

@@ -40,11 +40,14 @@ import com.rafael.baseui.theme.spacing
 import com.rafael.featureauth.R
 import com.rafael.featurebriefing.presentation.ui.BriefingScreen
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
+import com.rafael.featureproject.presentation.ui.ProjectScreen
+import com.rafael.featureproject.presentation.viewmodel.ProjectViewModel
 import org.koin.androidx.compose.getViewModel
 
 fun NavGraphBuilder.homeGraph(
     navController: NavController,
-    briefingViewModel: BriefingViewModel
+    briefingViewModel: BriefingViewModel,
+    projectViewModel: ProjectViewModel
 ) {
     val navigationitems = listOf(
         HomeRoutes.Projects.toBottomItem(),
@@ -56,14 +59,7 @@ fun NavGraphBuilder.homeGraph(
                 UiState.Success<Any>(Unit),
                 bottomBar = { BottomBar(navController = navController, items = navigationitems) }
             ) {
-                Column {
-                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
-                    Text(text = "Projetos", style = MaterialTheme.typography.h4)
-                    HelperAlert(
-                        text = "Você ainda não adiciou nenhum projeto. Faça um briefing antes de adicionar um projeto",
-                        vector = Icons.Outlined.Info
-                    )
-                }
+                ProjectScreen(navController = navController, viewModel = projectViewModel)
             }
         }
         composable(HomeRoutes.Briefing.route) {
@@ -72,7 +68,9 @@ fun NavGraphBuilder.homeGraph(
                 bottomBar = { BottomBar(navController = navController, items = navigationitems) },
                 topBar = {}
             ) {
-                BriefingScreen(navController = navController, viewModel = briefingViewModel)
+                BriefingScreen(navController = navController, viewModel = briefingViewModel, onProjectsReload = {
+                    projectViewModel.refresh()
+                })
             }
         }
     }

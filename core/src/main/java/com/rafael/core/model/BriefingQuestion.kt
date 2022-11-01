@@ -1,4 +1,4 @@
-package com.rafael.featurebriefing.domain.entity
+package com.rafael.core.model
 
 data class BriefingQuestion(
     val id: String,

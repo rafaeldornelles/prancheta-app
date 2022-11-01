@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import com.rafael.core.cache.UserCache
 import com.rafael.featureauth.di.authModule
 import com.rafael.featurebriefing.di.briefingModule
+import com.rafael.featureproject.di.projectModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -18,7 +19,8 @@ class PranchetaApplication : Application() {
             modules(
                 applicationModule,
                 authModule,
-                briefingModule
+                briefingModule,
+                projectModule
             )
         }
     }

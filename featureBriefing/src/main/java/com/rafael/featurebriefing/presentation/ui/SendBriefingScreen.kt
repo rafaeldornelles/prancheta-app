@@ -107,7 +107,7 @@ fun SendBriefingScreen(
                             if (q.question.options?.isNotEmpty() == true) {
                                 KeyValueText(
                                     key = "Opções",
-                                    value = q.question.options.joinToString(", ")
+                                    value = q.question.options?.joinToString(", ").orEmpty()
                                 )
                                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.x100))
                             }

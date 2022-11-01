@@ -42,6 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
 fun BriefingScreen(
     navController: NavController,
     viewModel: BriefingViewModel,
+    onProjectsReload: () -> Unit,
     context: Context = LocalContext.current
 ) {
     LaunchedEffect(key1 = Unit) {
@@ -49,6 +50,7 @@ fun BriefingScreen(
             when(it) {
                 is BriefingAction.ProjectCreated -> {
                     viewModel.refresh()
+                    onProjectsReload()
                 }
                 is BriefingAction.Error -> {
                     Toast.makeText(context, "Something went wrong. Try again later", Toast.LENGTH_SHORT).show()

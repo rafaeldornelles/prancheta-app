@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.components.ButtonState
 import com.rafael.core.common.SingleShotEventBus
-import com.rafael.featurebriefing.domain.entity.BriefingForm
+import com.rafael.core.model.BriefingForm
 import com.rafael.featurebriefing.domain.usecase.GetBriefingsUseCase
 import com.rafael.featurebriefing.domain.usecase.StartProjectUseCase
 import kotlinx.coroutines.launch

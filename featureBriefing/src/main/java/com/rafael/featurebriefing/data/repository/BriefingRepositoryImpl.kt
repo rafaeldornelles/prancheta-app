@@ -1,13 +1,12 @@
 package com.rafael.featurebriefing.data.repository
 
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.rafael.featurebriefing.data.mappers.BriefingForm
 import com.rafael.featurebriefing.data.mappers.BriefingQuestion
-import com.rafael.featurebriefing.domain.entity.BriefingForm
-import com.rafael.featurebriefing.domain.entity.BriefingFormQuestion
-import com.rafael.featurebriefing.domain.entity.BriefingQuestion
+import com.rafael.core.model.BriefingForm
+import com.rafael.core.model.BriefingFormQuestion
+import com.rafael.core.model.BriefingQuestion
 import com.rafael.featurebriefing.domain.repository.BriefingRepository
 import kotlinx.coroutines.tasks.await
 

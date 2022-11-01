@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.rafael.baseui.components.TextField
-import com.rafael.featurebriefing.domain.entity.BriefingFormQuestion
+import com.rafael.core.model.BriefingFormQuestion
 
 @Composable
 fun TextQuestion(

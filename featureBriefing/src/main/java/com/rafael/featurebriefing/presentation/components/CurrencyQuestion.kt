@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.rafael.baseui.common.CurrencyVisualTransformation
 import com.rafael.baseui.components.TextField
-import com.rafael.featurebriefing.domain.entity.BriefingFormQuestion
+import com.rafael.core.model.BriefingFormQuestion
 import java.text.NumberFormat
 import java.util.*
 

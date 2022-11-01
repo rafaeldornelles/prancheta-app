@@ -1,7 +1,7 @@
 package com.rafael.featurebriefing.presentation.viewmodel
 
 import com.rafael.baseui.common.BaseViewModel
-import com.rafael.featurebriefing.domain.entity.BriefingForm
+import com.rafael.core.model.BriefingForm
 import com.rafael.featurebriefing.domain.usecase.GetFormUseCase
 
 class BriefingResultViewModel(

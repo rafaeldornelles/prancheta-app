@@ -29,7 +29,7 @@ val briefingModule = module {
     single { GetFormUseCase(get()) }
     single { AnswerBriefingUseCase(get()) }
     single { GetBriefingsUseCase(get(), get()) }
-    single { StartProjectUseCase(get(), get()) }
+    single { StartProjectUseCase(get(), get(), get()) }
 
     viewModel { SendBriefingViewModel(get(), get()) }
     viewModel { (formId: String) -> AnswerBriefingViewModel(formId, get(), get()) }

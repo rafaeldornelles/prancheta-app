@@ -11,7 +11,9 @@ import com.rafael.featureauth.presentation.navigation.authGraph
 import com.rafael.featurebriefing.presentation.navigation.briefingGraph
 import com.rafael.baseui.theme.PranchetaTheme
 import com.rafael.core.cache.UserCache
+import com.rafael.core.model.Project
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
+import com.rafael.featureproject.presentation.viewmodel.ProjectViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
@@ -40,12 +42,13 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 val briefingViewModel: BriefingViewModel = getViewModel()
+                val projectViewModel: ProjectViewModel = getViewModel()
                 NavHost(
                     navController = navController,
                     startDestination = if (auth.currentUser == null) AuthRoutes.GRAPH_ROUTE else HomeRoutes.GRAPH_ROUTE
                 ) {
                     authGraph(navController)
-                    homeGraph(navController, briefingViewModel)
+                    homeGraph(navController, briefingViewModel, projectViewModel)
                     briefingGraph(navController, briefingViewModel)
                 }
             }
