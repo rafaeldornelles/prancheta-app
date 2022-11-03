@@ -4,4 +4,5 @@ import com.rafael.core.model.Project
 
 interface ProjectRepository {
     suspend fun getProjects(userId: String) : List<Project>
+    suspend fun getProject(projectId: String) : Project?
 }

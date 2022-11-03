@@ -13,6 +13,7 @@ import com.rafael.baseui.theme.PranchetaTheme
 import com.rafael.core.cache.UserCache
 import com.rafael.core.model.Project
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
+import com.rafael.featureproject.presentation.navigation.projectGraph
 import com.rafael.featureproject.presentation.viewmodel.ProjectViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.get
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
                     authGraph(navController)
                     homeGraph(navController, briefingViewModel, projectViewModel)
                     briefingGraph(navController, briefingViewModel)
+                    projectGraph(navController)
                 }
             }
         }

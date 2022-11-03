@@ -133,11 +133,7 @@ fun BriefingScreen(
                                             text = "Ver Projeto",
                                             height = 20.dp
                                         ) {
-                                            navController.navigate(
-                                                BriefingRoutes.BriefingResults.withArgs(
-                                                    BRIEFING_ID_KEY to briefing.id.orEmpty()
-                                                )
-                                            )
+                                            navController.navigate("project-detail?id=${briefing.projectId.orEmpty()}")
                                         }
                                     }
                                 }

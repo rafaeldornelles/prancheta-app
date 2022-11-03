@@ -18,6 +18,11 @@ class ProjectRepositoryImpl : ProjectRepository {
         }
     }
 
+    override suspend fun getProject(projectId: String): Project? {
+        val doc = db.collection(PROJECT_COLLECTION).document(projectId).get().await()
+        return Project(doc)
+    }
+
     companion object {
         const val PROJECT_COLLECTION = "projects"
         const val ARCHITECT_ID_KEY = "architectId"
