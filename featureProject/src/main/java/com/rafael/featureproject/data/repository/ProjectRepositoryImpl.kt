@@ -2,7 +2,9 @@ package com.rafael.featureproject.data.repository
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.rafael.core.model.ConstructionVisitation
 import com.rafael.core.model.Project
+import com.rafael.featureproject.data.mappers.ConstructionVisitation
 import com.rafael.featureproject.data.mappers.Project
 import com.rafael.featureproject.domain.repository.ProjectRepository
 import kotlinx.coroutines.tasks.await
@@ -23,8 +25,17 @@ class ProjectRepositoryImpl : ProjectRepository {
         return Project(doc)
     }
 
+    override suspend fun getVisitations(projectId: String): List<ConstructionVisitation> {
+        val doc = db.collection(PROJECT_COLLECTION).document(projectId).collection(
+            VISITATIONS_COLLECTION).get().await()
+        return doc.map {
+            ConstructionVisitation(it)
+        }
+    }
+
     companion object {
         const val PROJECT_COLLECTION = "projects"
         const val ARCHITECT_ID_KEY = "architectId"
+        const val VISITATIONS_COLLECTION = "visitation"
     }
 }

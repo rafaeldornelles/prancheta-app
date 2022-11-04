@@ -15,6 +15,9 @@ import com.rafael.baseui.components.ChevronRow
 import com.rafael.baseui.components.KeyValueRow
 import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.baseui.theme.spacing
+import com.rafael.core.common.withArgs
+import com.rafael.featureproject.presentation.navigation.ID_KEY
+import com.rafael.featureproject.presentation.navigation.ProjectRoutes
 import com.rafael.featureproject.presentation.viewmodel.ProjectDetailViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -43,7 +46,11 @@ fun ProjectDetailScreen(
                 Text(text = "Veja aqui as respostas do cliente para o briefing do projeto")
             }
             Divider()
-            ChevronRow() {
+            ChevronRow(
+                onclick = {
+                    navController.navigate(ProjectRoutes.Construction.withArgs(ID_KEY to state.project.id.orEmpty()))
+                }
+            ) {
                 Text(text = "Acompanhamento da Obra", style = MaterialTheme.typography.h5)
                 Text(text = "Verifique ou insira novas visitas à obra")
             }
