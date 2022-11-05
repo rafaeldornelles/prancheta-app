@@ -33,6 +33,16 @@ class ProjectRepositoryImpl : ProjectRepository {
         }
     }
 
+    override suspend fun addVisitation(projectId: String, visitation: ConstructionVisitation) {
+        db.collection(PROJECT_COLLECTION).document(projectId).collection(VISITATIONS_COLLECTION).add(visitation)
+    }
+
+    override suspend fun getVisitation(projectId: String, visitationId: String): ConstructionVisitation? {
+        val doc = db.collection(PROJECT_COLLECTION).document(projectId).collection(
+            VISITATIONS_COLLECTION).document(visitationId).get().await()
+        return ConstructionVisitation(doc)
+    }
+
     companion object {
         const val PROJECT_COLLECTION = "projects"
         const val ARCHITECT_ID_KEY = "architectId"

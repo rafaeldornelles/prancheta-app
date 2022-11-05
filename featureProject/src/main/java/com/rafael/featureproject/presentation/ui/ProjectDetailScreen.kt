@@ -1,5 +1,6 @@
 package com.rafael.featureproject.presentation.ui
 
+import OnLifecycleEvent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -10,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.rafael.baseui.components.ChevronRow
 import com.rafael.baseui.components.KeyValueRow

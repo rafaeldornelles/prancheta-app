@@ -1,32 +1,38 @@
 package com.rafael.featureproject.presentation.ui
 
-import android.util.Log
+import android.content.Context
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -41,8 +47,11 @@ import com.rafael.baseui.theme.spacing
 import com.rafael.core.extensions.createImageFile
 import com.rafael.core.extensions.parsedate
 import com.rafael.core.extensions.showDatePicker
+import com.rafael.featureproject.presentation.viewmodel.AddVisitationAction
 import com.rafael.featureproject.presentation.viewmodel.AddVisitationViewModel
+import com.rafael.featureproject.presentation.viewmodel.ProjectViewModel
 import java.io.File
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -61,17 +70,30 @@ fun AddVisitationScreen(
     }
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture(),
-        onResult = {isSuccess: Boolean ->
-            Log.d("AAA", isSuccess.toString())
+        onResult = { isSuccess: Boolean ->
             if (isSuccess) {
-                Log.d("AAA", "isSuccess.toString()")
                 viewModel.addFile(currentFile)
             }
         }
     )
+    LaunchedEffect(key1 = Unit) {
+        viewModel.action.collectLatest {
+            when(it) {
+                AddVisitationAction.VisitationAdded -> {
+                    navController.popBackStack()
+                }
+                is AddVisitationAction.Error -> {
+                    Toast.makeText(context, it.t.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
     Scaffold(state = viewModel.uiState) { state ->
         LazyColumn() {
             item {
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
+                Text("Adicionar visita", style = MaterialTheme.typography.h4)
+                Text(text = "Adicione as informações referentes à sua visita")
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -87,20 +109,40 @@ fun AddVisitationScreen(
                         Icon(imageVector = Icons.Outlined.CalendarMonth, contentDescription = null)
                     }
                 )
-            }
-            item {
-                TextField(state = state.observation, onValueChange = viewModel::onObservationChange)
-            }
-            item {
-                Button(text = "Add photo") {
-                    currentFile = context.createImageFile().apply {
-                        val uri = FileProvider.getUriForFile(context, "application_authority", this)
-                        cameraLauncher.launch(uri)
-                    }
-                }
-            }
-            item {
+                TextField(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp), state = state.observation, onValueChange = viewModel::onObservationChange, lineCount = Int.MAX_VALUE)
+                Text("Fotos", style = MaterialTheme.typography.h5)
+                Text(text = "Adicione fotos da sua visita!")
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.x200))
                 LazyRow() {
+                    item {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .padding(end = MaterialTheme.spacing.x200)
+                                .size(150.dp)
+                                .border(1.dp, Color.LightGray, MaterialTheme.shapes.medium)
+                                .clickable {
+                                    currentFile = context
+                                        .createImageFile()
+                                        .apply {
+                                            val uri = FileProvider.getUriForFile(
+                                                context,
+                                                "application_authority",
+                                                this
+                                            )
+                                            cameraLauncher.launch(uri)
+                                        }
+                                }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Add,
+                                contentDescription = null,
+                                tint = Color.LightGray
+                            )
+                        }
+                    }
                     items(state.images) {
                         Image(
                             modifier = Modifier
@@ -112,6 +154,11 @@ fun AddVisitationScreen(
                             contentDescription = null
                         )
                     }
+                }
+                Button(modifier = Modifier
+                    .padding(vertical = MaterialTheme.spacing.x400)
+                    .fillMaxWidth(), text = "Salvar") {
+                    viewModel.saveVisitation()
                 }
             }
         }

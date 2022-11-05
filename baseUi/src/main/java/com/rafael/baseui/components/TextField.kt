@@ -42,7 +42,8 @@ fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onValueChange: (String) -> Unit,
     leadingIcon: (@Composable () -> Unit)? = null,
-    trailingIcon: (@Composable () -> Unit)? = null
+    trailingIcon: (@Composable () -> Unit)? = null,
+    lineCount: Int = 1
 ) {
     TextField(
         modifier = modifier,
@@ -56,7 +57,8 @@ fun TextField(
         keyboardActions = keyboardActions,
         onValueChange = onValueChange,
         leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon
+        trailingIcon = trailingIcon,
+        lineCount = lineCount
     )
 }
 
@@ -73,7 +75,8 @@ fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onValueChange: (String) -> Unit,
     leadingIcon: (@Composable () -> Unit)? = null,
-    trailingIcon: (@Composable () -> Unit)? = null
+    trailingIcon: (@Composable () -> Unit)? = null,
+    lineCount: Int = 1
 ) {
     var debouncedError by remember {
         mutableStateOf(if (value.isNotEmpty()) validator?.invoke(value) else null)
@@ -103,8 +106,8 @@ fun TextField(
                 debouncedError = null
                 onValueChange(it.replace("\n", ""))
             },
-            singleLine = true,
-            maxLines = 1,
+            singleLine = lineCount == 1,
+            maxLines = lineCount,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon
         )

@@ -5,13 +5,13 @@ import com.rafael.core.model.mappers.ConstructionVisitationKeys.IMAGES_KEY
 import com.rafael.core.model.mappers.ConstructionVisitationKeys.OBSERVATION_KEY
 
 fun ConstructionVisitation(
-    id: String,
+    id: String?,
     map: Map<String, Any>
 ) = com.rafael.core.model.ConstructionVisitation(
     id = id,
     date = map[DATE_KEY] as Long,
     observation = map[OBSERVATION_KEY] as String,
-    images = map[IMAGES_KEY] as List<ByteArray>
+    images = map[IMAGES_KEY] as List<String>
 )
 
 private object ConstructionVisitationKeys {

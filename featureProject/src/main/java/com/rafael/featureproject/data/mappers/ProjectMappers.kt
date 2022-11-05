@@ -19,3 +19,6 @@ fun ConstructionVisitation(doc: QueryDocumentSnapshot) = ConstructionVisitation(
     id = doc.id,
     map = doc.data
 )
+fun ConstructionVisitation(doc: DocumentSnapshot) = doc.data?.let {
+    ConstructionVisitation(doc.id, it)
+}

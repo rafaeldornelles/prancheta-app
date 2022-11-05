@@ -1,5 +1,6 @@
 package com.rafael.featureproject.presentation.ui
 
+import OnLifecycleEvent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.rafael.baseui.components.ChevronRow
 import com.rafael.baseui.scaffold.Scaffold
@@ -25,6 +27,7 @@ import com.rafael.baseui.theme.spacing
 import com.rafael.core.common.withArgs
 import com.rafael.core.extensions.formatDate
 import com.rafael.featureproject.presentation.navigation.ID_KEY
+import com.rafael.featureproject.presentation.navigation.ID_SECONDARY_KEY
 import com.rafael.featureproject.presentation.navigation.ProjectRoutes
 import com.rafael.featureproject.presentation.viewmodel.ConstructionViewModel
 import java.util.*
@@ -39,6 +42,11 @@ fun ConstructionScreen(
         parametersOf(projectId)
     }
 ) {
+    OnLifecycleEvent { owner, event ->
+        if (viewModel.uiState.getOrNull() != null && event == Lifecycle.Event.ON_RESUME) {
+            viewModel.refresh()
+        }
+    }
     Scaffold(state = viewModel.uiState) { state ->
         Column(Modifier.verticalScroll(rememberScrollState())) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
@@ -66,7 +74,13 @@ fun ConstructionScreen(
                 Divider()
             } else {
                 state.visitations.forEach {
-                    ChevronRow {
+                    ChevronRow(
+                        onclick = {
+                            navController.navigate(ProjectRoutes.VisitationDetail.withArgs(
+                                ID_KEY to it.id.orEmpty(), ID_SECONDARY_KEY to projectId
+                            ))
+                        }
+                    ) {
                         Text(text = it.date.formatDate())
                     }
                 }
