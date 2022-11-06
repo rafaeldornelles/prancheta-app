@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.navigation.NavController
 import com.rafael.baseui.components.Button
 import com.rafael.baseui.components.ButtonSecondary
@@ -61,7 +63,7 @@ fun LoginScreen(
             Text(text = stringResource(R.string.login_scrin_call_to_action))
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x500))
             TextField(state = state.emailState, onValueChange = viewModel::onEmailChange)
-            TextField(state = state.passwordState, onValueChange = viewModel::onPasswordChange)
+            TextField(state = state.passwordState, onValueChange = viewModel::onPasswordChange, visualTransformation = PasswordVisualTransformation())
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
             Button(
                 modifier = Modifier.fillMaxWidth(),

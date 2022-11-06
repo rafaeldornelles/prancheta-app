@@ -10,5 +10,7 @@ data class Project(
     val clientEmail: String,
     val architectId: String,
     val projectStart: Long,
-    val briefing: BriefingForm
+    val briefing: BriefingForm,
+    val isConcluded: Boolean = false,
+    val feedback: String? = null
 )

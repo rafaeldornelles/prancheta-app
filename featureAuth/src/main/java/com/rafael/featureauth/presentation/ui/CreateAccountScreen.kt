@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.rafael.baseui.components.Button
 import com.rafael.baseui.components.TextField
 import com.rafael.baseui.scaffold.Scaffold
@@ -49,7 +50,7 @@ fun CreateAccountScreen(
             Text(text = stringResource(R.string.create_account_action))
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x500))
             TextField(state = state.emailState, onValueChange = viewModel::onEmailChange)
-            TextField(state = state.passwordState, onValueChange = viewModel::onPasswordChange)
+            TextField(state = state.passwordState, onValueChange = viewModel::onPasswordChange, visualTransformation = PasswordVisualTransformation())
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x200))
             Button(
                 modifier = Modifier.fillMaxWidth(),

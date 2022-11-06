@@ -2,6 +2,7 @@ package com.rafael.featureproject.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
@@ -32,15 +33,19 @@ fun ProjectScreen(
     viewModel: ProjectViewModel
 ) {
     Scaffold(state = viewModel.uiState, bottomBar = {}, topBar = {}, horizontalPadding = 0.dp) {
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
-            Text(text = "Projetos", style = MaterialTheme.typography.h4)
-            if (it.projects.isEmpty()) {
+        if (it.projects.isEmpty()) {
+            Column {
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
+                Text(text = "Projetos", style = MaterialTheme.typography.h4)
                 HelperAlert(
                     text = "Você ainda não adicionou nenhum projeto. Faça um briefing antes de adicionar um projeto",
                     vector = Icons.Outlined.Info
                 )
-            } else {
+            }
+        } else {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
+                Text(text = "Projetos", style = MaterialTheme.typography.h4)
                 Text(text = "Os seus projetos em andamento aparecerão aqui")
                 it.projects.forEach {
                     Card(Modifier.fillMaxWidth()) {

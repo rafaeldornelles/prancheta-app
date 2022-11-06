@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBox
+import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Info
@@ -78,9 +79,9 @@ fun NavGraphBuilder.homeGraph(
 
 sealed class HomeRoutes(route: String, @StringRes val label: Int, val icon: ImageVector) :
     Routes(route) {
-    object Projects : HomeRoutes("projects", R.string.login_label, Icons.Outlined.List)
+    object Projects : HomeRoutes("projects", R.string.projects_label, Icons.Outlined.List)
     object Briefing :
-        HomeRoutes("briefing-tab", R.string.login_label, Icons.Outlined.Search)
+        HomeRoutes("briefing-tab", R.string.briefing_label, Icons.Outlined.Search)
 
     fun toBottomItem() = BottomNavigationItem(route, icon, label)
 
