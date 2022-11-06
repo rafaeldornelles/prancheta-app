@@ -9,4 +9,5 @@ interface ProjectRepository {
     suspend fun getVisitations(projectId: String) : List<ConstructionVisitation>
     suspend fun addVisitation(projectId: String, visitation: ConstructionVisitation)
     suspend fun getVisitation(projectId: String, visitationId: String) : ConstructionVisitation?
+    suspend fun updateProject(projectId: String, project: Project)
 }

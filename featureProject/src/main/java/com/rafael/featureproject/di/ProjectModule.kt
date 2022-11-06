@@ -7,9 +7,12 @@ import com.rafael.featureproject.domain.usecase.GetProjectUseCase
 import com.rafael.featureproject.domain.usecase.GetProjectsUseCase
 import com.rafael.featureproject.domain.usecase.GetVisitationUseCase
 import com.rafael.featureproject.domain.usecase.GetVisitationsUseCase
+import com.rafael.featureproject.domain.usecase.UpdateProjectUseCase
 import com.rafael.featureproject.presentation.ui.ConstructionScreen
 import com.rafael.featureproject.presentation.viewmodel.AddVisitationViewModel
+import com.rafael.featureproject.presentation.viewmodel.AnswerFeedbackViewModel
 import com.rafael.featureproject.presentation.viewmodel.ConstructionViewModel
+import com.rafael.featureproject.presentation.viewmodel.FeedbackViewModel
 import com.rafael.featureproject.presentation.viewmodel.ProjectDetailViewModel
 import com.rafael.featureproject.presentation.viewmodel.ProjectViewModel
 import com.rafael.featureproject.presentation.viewmodel.VisitationDetailViewModel
@@ -22,12 +25,15 @@ val projectModule = module {
     viewModel { (projectId: String) -> ConstructionViewModel(projectId, get()) }
     viewModel { (projectId: String) -> AddVisitationViewModel(projectId, get()) }
     viewModel { (projectId: String, visitationId: String) -> VisitationDetailViewModel(projectId, visitationId, get())}
+    viewModel { (projectId: String) -> FeedbackViewModel(projectId, get(), get())}
+    viewModel { (projectId: String) -> AnswerFeedbackViewModel(projectId, get(), get())}
 
     single { GetProjectsUseCase(get(), get()) }
     single { GetProjectUseCase(get()) }
     single { GetVisitationsUseCase(get()) }
     single { AddVisitationUseCase(get()) }
     single { GetVisitationUseCase(get()) }
+    single { UpdateProjectUseCase(get()) }
 
     single<ProjectRepository> { ProjectRepositoryImpl() }
 }

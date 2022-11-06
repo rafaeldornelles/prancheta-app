@@ -43,6 +43,10 @@ class ProjectRepositoryImpl : ProjectRepository {
         return ConstructionVisitation(doc)
     }
 
+    override suspend fun updateProject(projectId: String, project: Project) {
+        db.collection(PROJECT_COLLECTION).document(projectId).set(project)
+    }
+
     companion object {
         const val PROJECT_COLLECTION = "projects"
         const val ARCHITECT_ID_KEY = "architectId"

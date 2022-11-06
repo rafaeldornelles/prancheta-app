@@ -57,7 +57,11 @@ fun ProjectDetailScreen(
                 Text(text = "Verifique ou insira novas visitas à obra")
             }
             Divider()
-            ChevronRow() {
+            ChevronRow(
+                onclick = {
+                    navController.navigate(ProjectRoutes.Feedback.withArgs(ID_KEY to projectId))
+                }
+            ) {
                 Text(text = "Feedback", style = MaterialTheme.typography.h5)
                 Text(text = "Depois que o projeto for concluído, peça para o cliente deixar um feedback!")
             }

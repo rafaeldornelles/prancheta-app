@@ -2,4 +2,5 @@
 <resources>
     <string name="date_label">Data da Visita</string>
     <string name="observation_label">Observações</string>
+    <string name="feedback_label">Feedback</string>
 </resources>

@@ -33,6 +33,6 @@ private object Projectkeys {
     const val PROJECT_START = "projectStart"
     const val PROJECT_BRIEFING_KEY = "briefing"
     const val BRIEFING_ID_KEY = "id"
-    const val IS_CONCLUDED_KEY = "isConcluded"
+    const val IS_CONCLUDED_KEY = "concluded"
     const val FEEDBACK_KEY = "feedback"
 }
