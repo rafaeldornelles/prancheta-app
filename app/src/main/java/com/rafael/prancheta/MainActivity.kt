@@ -34,6 +34,8 @@ class MainActivity : ComponentActivity() {
                 projectViewModel = getViewModel()
                 auth.addAuthStateListener {
                     userCache.currentUserId = it.currentUser?.uid
+                    briefingViewModel.refresh()
+                    projectViewModel.refresh()
                     if (it.currentUser == null) {
                         navController.navigate(AuthRoutes.Login.route) {
                             popUpTo(0)

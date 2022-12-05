@@ -2,6 +2,8 @@ package com.rafael.featurebriefing.presentation.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -171,6 +173,19 @@ fun BriefingScreen(
                                             url.toUri()
                                         ).apply { context.startActivity(this) }
                                     }
+                                }
+                                Log.d("aaaa", Build.VERSION.SDK_INT.toString())
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                    Text(
+                                        text = "Atenção: A partir do android 12, o Google introduziu verificações de " +
+                                                "segurança que exigem que para o funcionamento automático dos deeplinking, " +
+                                                "o desenvolvedor publique um certificado no host de destino do link. Devido à " +
+                                                "impossibilidade de fazer essa publicação na etapa atual do desenvolvimento do app, " +
+                                                "para fins de teste da ferramenta, solicita-se que o usuário acesse, nas configurações, " +
+                                                "as informações do app, selecione 'abrir por padrão', clique em 'adicionar link', e " +
+                                                "inclua a permissão manualmente para o domínio 'prancheta.com'; Depois disso, será possível " +
+                                                "acessar os links diretos para as áreas do aplicativo."
+                                    )
                                 }
                             }
                         }
