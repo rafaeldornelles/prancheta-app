@@ -1,18 +1,16 @@
 package com.rafael.featurebriefing.domain.usecase
 
-import com.rafael.core.cache.UserCache
+import com.rafael.core.datasource.model.toBriefingForm
+import com.rafael.core.extensions.mapSuccess
 import com.rafael.core.model.BriefingForm
 import com.rafael.featurebriefing.domain.repository.BriefingRepository
 
 class GetBriefingsUseCase(
-    private val briefingRepository: BriefingRepository,
-    private val userCache: UserCache
+    private val briefingRepository: BriefingRepository
 ) {
     suspend operator fun invoke() : Result<List<BriefingForm>> {
-        return try {
-            Result.success(briefingRepository.getBriefings(userCache.currentUserId.orEmpty()))
-        } catch (t: Throwable) {
-            Result.failure(t)
+        return briefingRepository.getBriefings().mapSuccess {
+            it.map { it.toBriefingForm() }
         }
     }
 }

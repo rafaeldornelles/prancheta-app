@@ -1,21 +1,24 @@
 package com.rafael.featureauth.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.rafael.baseui.components.TextFieldState
-import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.R
+import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.components.ButtonState
+import com.rafael.baseui.components.TextFieldState
+import com.rafael.core.cache.TokenCache
 import com.rafael.core.common.Constants.PASSWORD_MIN_LENGTH
 import com.rafael.core.common.SingleShotEventBus
 import com.rafael.core.extensions.isValidEmail
+import com.rafael.featureauth.domain.usecase.LoginUseCase
+import com.rafael.featureauth.domain.usecase.RegisterUseCase
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
-class LoginViewModel : BaseViewModel<LoginUiState>() {
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase,
+    private val registerUseCase: RegisterUseCase,
+    private val tokenCache: TokenCache
+) : BaseViewModel<LoginUiState>() {
 
-    private val auth = FirebaseAuth.getInstance()
     val _action = SingleShotEventBus<LoginAction>()
     val action get() = _action.events
 
@@ -25,17 +28,19 @@ class LoginViewModel : BaseViewModel<LoginUiState>() {
             placeholder = R.string.default_email_placeholder,
             validator = {
                 if (it.isValidEmail()) null else R.string.default_invalid_email_message
-            }
+            },
+            value = "rafael@email.com" // TODO: REMOVER
         ),
         passwordState = TextFieldState(
             label = R.string.default_password,
             placeholder = R.string.default_password_placeholder,
             validator = {
                 if (it.length >= PASSWORD_MIN_LENGTH) null else R.string.default_invalid_password_message
-            }
+            },
+            value = "password" //TODO: REMOVER
         ),
         buttonState = ButtonState(
-            enabled = false,
+            enabled = true, //TODO: TROCAR
             loading = false
         )
     )
@@ -70,29 +75,8 @@ class LoginViewModel : BaseViewModel<LoginUiState>() {
             val password = state.passwordState.value.trim()
             viewModelScope.launch {
                 setButtonLoading()
-                try {
-                    auth.signInWithEmailAndPassword(email, password).await()
-                } catch (e: FirebaseAuthException) {
-                    _action.postEvent(LoginAction.LoginAuthError)
-                } catch (e: Exception) {
-                    _action.postEvent(LoginAction.LoginGenericError)
-                }
-                setButtonLoading(false)
-            }
-        }
-    }
-
-    fun createAccount() {
-        uiState.getOrNull()?.let { state ->
-            val email = state.emailState.value.trim()
-            val password = state.passwordState.value.trim()
-            viewModelScope.launch {
-                setButtonLoading()
-                try {
-                    auth.createUserWithEmailAndPassword(email, password).await()
-                } catch (e: FirebaseAuthException) {
-                    _action.postEvent(LoginAction.LoginAuthError)
-                }
+                val result = loginUseCase(email, password)
+                if (result.isFailure) _action.postEvent(LoginAction.LoginAuthError)
                 setButtonLoading(false)
             }
         }

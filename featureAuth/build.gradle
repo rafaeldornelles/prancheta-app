@@ -56,7 +56,5 @@ dependencies {
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
-    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
-    /* coroutines support for firebase operations */
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 }

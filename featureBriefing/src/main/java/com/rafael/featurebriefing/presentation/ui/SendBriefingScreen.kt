@@ -3,6 +3,7 @@ package com.rafael.featurebriefing.presentation.ui
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,15 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.baseui.components.Button
 import com.rafael.baseui.components.Card
 import com.rafael.baseui.components.KeyValueText
 import com.rafael.baseui.components.SelectionItem
-import com.rafael.baseui.components.TextField
 import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.baseui.theme.spacing
 import com.rafael.featurebriefing.presentation.viewmodel.BriefingViewModel
@@ -32,23 +32,30 @@ import com.rafael.featurebriefing.presentation.viewmodel.SendBriefingAction
 import com.rafael.featurebriefing.presentation.viewmodel.SendBriefingViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun SendBriefingScreen(
     navController: NavController,
-    viewModel: SendBriefingViewModel = getViewModel(),
+    viewModel: SendBriefingViewModel = getViewModel() {
+        parametersOf(selectedBriefing, clientName, clientEmail)
+    },
     briefingViewModel: BriefingViewModel,
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    clientName: String,
+    clientEmail: String,
+    selectedBriefing: String
 ) {
     LaunchedEffect(key1 = Unit) {
-        viewModel.action.collectLatest { 
-            when(it) {
+        viewModel.action.collectLatest {
+            when (it) {
                 SendBriefingAction.BriefingSent -> {
                     Toast.makeText(context, "Briefing enviado com sucesso", Toast.LENGTH_SHORT)
                         .show()
                     briefingViewModel.refresh()
-                    navController.popBackStack()
+                    navController.popBackStack("briefing-tab", false)
                 }
+
                 is SendBriefingAction.Error -> {
                     Toast.makeText(
                         context,
@@ -63,30 +70,26 @@ fun SendBriefingScreen(
         Column(Modifier.verticalScroll(rememberScrollState())) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x300))
             Text(
-                text = "Enviar Briefing",
+                text = "Quase lá...",
                 modifier = Modifier.padding(bottom = MaterialTheme.spacing.x300),
                 style = MaterialTheme.typography.h4
             )
-            Text(text = "O briefing é a primeira etapa de um projeto de arquitetura e consiste em alinhar expectativas entre arquiteto e cliente. \n\nNesta etapa, vamos preencher os dados do cliente, selecionar as perguntas a serem respondidas e enviar um link para o cliente acessar o formulário de briefing.")
+            Text(text = "Confirme os dados e as perguntas a serem enviadas e quanto estiver tudo pronto, clique em enviar.")
+            Row {
+                Text(text = "Cliente: ", fontWeight = FontWeight.Black)
+                Text(text = clientName)
+            }
+            Row {
+                Text(text = "Email: ", fontWeight = FontWeight.Black)
+                Text(text = clientEmail)
+            }
             Divider(
                 modifier = Modifier.padding(vertical = MaterialTheme.spacing.x300),
                 color = MaterialTheme.colors.primary,
                 thickness = 1.dp
             )
-            Text(text = "1. Preencha os dados do cliente")
-            TextField(
-                state = state.clientNameState,
-                onValueChange = { viewModel.onClientInfoChange(name = it) }
-            )
-            TextField(
-                state = state.clientEmailState,
-                onValueChange = { viewModel.onClientInfoChange(email = it) })
-            Divider(
-                modifier = Modifier.padding(vertical = MaterialTheme.spacing.x300),
-                color = MaterialTheme.colors.primary,
-                thickness = 1.dp
-            )
-            Text(text = "2. Selecione as perguntas que serão enviadas")
+
+            Text(text = "3. Selecione as perguntas que serão enviadas")
             state.questions.forEach { q ->
                 Card {
                     SelectionItem(

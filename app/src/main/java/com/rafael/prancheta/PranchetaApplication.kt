@@ -3,7 +3,9 @@ package com.rafael.prancheta
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import com.rafael.core.cache.TokenCache
 import com.rafael.core.cache.UserCache
+import com.rafael.core.datasource.di.dataSourceModule
 import com.rafael.featureauth.di.authModule
 import com.rafael.featurebriefing.di.briefingModule
 import com.rafael.featureproject.di.projectModule
@@ -20,7 +22,8 @@ class PranchetaApplication : Application() {
                 applicationModule,
                 authModule,
                 briefingModule,
-                projectModule
+                projectModule,
+                dataSourceModule
             )
         }
     }
@@ -29,4 +32,5 @@ class PranchetaApplication : Application() {
 val applicationModule = module {
     single<SharedPreferences> { androidContext().getSharedPreferences("prancheta", MODE_PRIVATE) }
     single { UserCache(get()) }
+    single { TokenCache(get()) }
 }

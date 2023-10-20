@@ -67,8 +67,6 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "io.insert-koin:koin-core:$koin_version"
 
     // Koin
@@ -76,6 +74,5 @@ dependencies {
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
-    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 }

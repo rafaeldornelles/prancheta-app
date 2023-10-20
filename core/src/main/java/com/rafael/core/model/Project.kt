@@ -1,7 +1,7 @@
 package com.rafael.core.model
 
 import androidx.annotation.Keep
-import java.util.*
+import java.util.Date
 
 @Keep
 data class Project(
@@ -9,7 +9,7 @@ data class Project(
     val clientName: String,
     val clientEmail: String,
     val architectId: String,
-    val projectStart: Long,
+    val projectStart: Date,
     val briefing: BriefingForm,
     val isConcluded: Boolean = false,
     val feedback: String? = null

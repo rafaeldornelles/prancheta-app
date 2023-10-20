@@ -40,7 +40,6 @@ fun BriefingResultScreen(
                 KeyValueRow(key = "Cliente", value = it.form.clientName)
                 KeyValueRow(key = "E-mail", value = it.form.clientEmail)
             }
-
             items(it.form.questions) {
                 Column(Modifier.padding(top = MaterialTheme.spacing.x300)) {
                     Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.x300)) {
@@ -65,7 +64,7 @@ fun BriefingResultScreen(
                             value = it.answer.orEmpty(),
                             modifier = Modifier.padding(top = MaterialTheme.spacing.x200)
                         )
-                        if (it.question.optionsUrl != null) {
+                        if (!it.question.optionsUrl.isNullOrEmpty()) {
                             it.question.options?.indexOf(it.answer)?.let { i ->
                                 AsyncImage(
                                     modifier = Modifier

@@ -87,12 +87,26 @@ fun AnswerBriefingScren(
                         question = q,
                         onValueChange = viewModel::onQuestionAnswered
                     )
+
                     QuestionType.RADIO -> RadioQuestion(
                         question = q,
                         onValueChange = viewModel::onQuestionAnswered
                     )
+
                     QuestionType.RADIOIMAGE -> RadioImageQuestion(
                         question = q,
+                        onValueChange = viewModel::onQuestionAnswered
+                    )
+
+                    QuestionType.YESNO -> RadioQuestion(
+                        question = q.copy(
+                            question = q.question.copy(
+                                options = listOf(
+                                    "Sim",
+                                    "Não"
+                                )
+                            )
+                        ),
                         onValueChange = viewModel::onQuestionAnswered
                     )
                 }
