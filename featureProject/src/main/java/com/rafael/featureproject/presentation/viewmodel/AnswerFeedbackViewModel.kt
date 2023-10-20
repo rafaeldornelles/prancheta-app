@@ -8,14 +8,14 @@ import com.rafael.baseui.components.isValidAndNotEmpty
 import com.rafael.core.common.SingleShotEventBus
 import com.rafael.core.model.Project
 import com.rafael.featureproject.R
+import com.rafael.featureproject.domain.usecase.AnswerFeedbackUseCase
 import com.rafael.featureproject.domain.usecase.GetProjectUseCase
-import com.rafael.featureproject.domain.usecase.UpdateProjectUseCase
 import kotlinx.coroutines.launch
 
 class AnswerFeedbackViewModel(
     private val projectId: String,
     private val getProject: GetProjectUseCase,
-    private val updateProject: UpdateProjectUseCase
+    private val answerFeedback: AnswerFeedbackUseCase
 ) : BaseViewModel<AnswerFeedbackViewData>() {
 
     private val _events = SingleShotEventBus<AnswerFeedbackAction>()
@@ -39,15 +39,12 @@ class AnswerFeedbackViewModel(
         uiState.getOrNull()?.let { state ->
             viewModelScope.launch {
                 setButtonLoading(true)
-                updateProject(
-                    projectId, state.project.copy(
-                        feedback = state.inputState.value
-                    )
-                ).onSuccess {
-                    _events.postEvent(AnswerFeedbackAction.Success)
-                }.onFailure {
-                    _events.postEvent(AnswerFeedbackAction.Error(it))
-                }
+                answerFeedback(projectId, state.inputState.value)
+                    .onSuccess {
+                        _events.postEvent(AnswerFeedbackAction.Success)
+                    }.onFailure {
+                        _events.postEvent(AnswerFeedbackAction.Error(it))
+                    }
                 setButtonLoading(false)
             }
         }

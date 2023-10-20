@@ -78,7 +78,7 @@ fun BriefingScreen(
                     TopAppBarAction(
                         "Adicionar",
                         Icons.Outlined.Add
-                    ) { navController.navigate(BriefingRoutes.SendBriefing.route) }
+                    ) { navController.navigate(BriefingRoutes.FillBriefingClientInfo.route) }
                 )
             )
         },

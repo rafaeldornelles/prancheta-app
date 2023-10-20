@@ -7,4 +7,8 @@
     <string name="default_password_placeholder">******</string>
     <string name="default_invalid_email_message">E-mail inválido</string>
     <string name="default_invalid_password_message">Password must contain at least 6 characters</string>
+    <string name="default_first_name">Nome</string>
+    <string name="default_first_name_placeholder">João</string>
+    <string name="default_last_name">Sobrenome</string>
+    <string name="default_last_name_placeholder">da Silva</string>
 </resources>

@@ -1,22 +1,14 @@
 package com.rafael.featurebriefing.data.repository
 
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.rafael.core.model.Project
+import com.rafael.core.datasource.endpoints.ProjectEndpoint
+import com.rafael.core.datasource.model.ProjectRequest
+import com.rafael.core.datasource.model.ProjectResponse
 import com.rafael.featurebriefing.domain.repository.ProjectRepository
-import kotlinx.coroutines.tasks.await
 
-class ProjectRepositoryImpl : ProjectRepository {
-
-    private val db = Firebase.firestore
-
-    override suspend fun startProject(project: Project): String {
-        val doc = db.collection(PROJECT_COLLECTION).add(project).await()
-        return doc.id
-    }
-
-    companion object {
-        private const val USERS_COLLECTION = "users"
-        private const val PROJECT_COLLECTION = "projects"
+class ProjectRepositoryImpl(
+    private val endpoint: ProjectEndpoint
+) : ProjectRepository {
+    override suspend fun startProject(project: ProjectRequest): Result<ProjectResponse> {
+        return endpoint.insertProject(project)
     }
 }

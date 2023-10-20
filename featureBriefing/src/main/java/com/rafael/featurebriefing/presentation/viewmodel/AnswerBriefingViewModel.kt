@@ -7,12 +7,12 @@ import com.rafael.core.common.SingleShotEventBus
 import com.rafael.core.model.BriefingForm
 import com.rafael.core.model.QuestionType
 import com.rafael.featurebriefing.domain.usecase.AnswerBriefingUseCase
-import com.rafael.featurebriefing.domain.usecase.GetFormUseCase
+import com.rafael.featurebriefing.domain.usecase.FindBriefingById
 import kotlinx.coroutines.launch
 
 class AnswerBriefingViewModel(
     private val formId: String,
-    private val getForm: GetFormUseCase,
+    private val getForm: FindBriefingById,
     private val answerBriefing: AnswerBriefingUseCase
 ) : BaseViewModel<AnswerBriefingViewData>() {
 

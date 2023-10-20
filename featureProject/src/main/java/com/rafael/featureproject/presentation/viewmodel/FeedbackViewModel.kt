@@ -2,16 +2,15 @@ package com.rafael.featureproject.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.rafael.baseui.common.BaseViewModel
-import com.rafael.baseui.components.ButtonState
 import com.rafael.core.model.Project
 import com.rafael.featureproject.domain.usecase.GetProjectUseCase
-import com.rafael.featureproject.domain.usecase.UpdateProjectUseCase
+import com.rafael.featureproject.domain.usecase.RequestFeedbackUseCase
 import kotlinx.coroutines.launch
 
 class FeedbackViewModel(
     private val projectId: String,
     private val getProject: GetProjectUseCase,
-    private val updateProject: UpdateProjectUseCase
+    private val requestFeedbackUseCase: RequestFeedbackUseCase
 ) : BaseViewModel<FeedBackViewData>() {
     override suspend fun getInitial() = FeedBackViewData(
         project = getProject(projectId).getOrThrow()
@@ -21,7 +20,7 @@ class FeedbackViewModel(
         uiState.getOrNull()?.let {
             viewModelScope.launch {
                 setLoading()
-                updateProject(projectId, it.project.copy(isConcluded = true)).getOrElse {
+                requestFeedbackUseCase(projectId).getOrElse {
                     setError(it)
                     return@launch
                 }

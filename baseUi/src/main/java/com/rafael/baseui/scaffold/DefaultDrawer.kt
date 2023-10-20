@@ -1,6 +1,5 @@
 package com.rafael.baseui.scaffold
 
-import android.widget.Space
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,22 +13,27 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.google.firebase.auth.FirebaseAuth
 import com.rafael.baseui.theme.spacing
+import com.rafael.core.cache.TokenCache
+import org.koin.androidx.compose.get
 
 @Composable
-fun DefaultDrawer() {
+fun DefaultDrawer(
+    tokenCache: TokenCache = get()
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                val auth = FirebaseAuth.getInstance()
-                auth.signOut()
+                tokenCache.clear()
             }
-            .padding(MaterialTheme.spacing.x300)
-        ,
+            .padding(MaterialTheme.spacing.x300),
     ) {
-        Icon(imageVector = Icons.Outlined.ExitToApp, contentDescription = null, tint = MaterialTheme.colors.onBackground)
+        Icon(
+            imageVector = Icons.Outlined.ExitToApp,
+            contentDescription = null,
+            tint = MaterialTheme.colors.onBackground
+        )
         Spacer(modifier = Modifier.width(MaterialTheme.spacing.x300))
         Text(text = "Logoff")
     }

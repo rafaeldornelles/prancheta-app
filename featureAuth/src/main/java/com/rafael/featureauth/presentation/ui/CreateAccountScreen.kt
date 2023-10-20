@@ -22,20 +22,20 @@ import com.rafael.baseui.scaffold.Scaffold
 import com.rafael.baseui.scaffold.TopAppBar
 import com.rafael.baseui.theme.spacing
 import com.rafael.featureauth.R
-import com.rafael.featureauth.presentation.viewmodel.LoginAction
-import com.rafael.featureauth.presentation.viewmodel.LoginViewModel
+import com.rafael.featureauth.presentation.viewmodel.CreateAccountAction
+import com.rafael.featureauth.presentation.viewmodel.CreateAccountViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun CreateAccountScreen(
-    viewModel: LoginViewModel = getViewModel()
+    viewModel: CreateAccountViewModel = getViewModel()
 ) {
     val context = LocalContext.current
     val invalidCredentialsMessage =  stringResource(R.string.login_create_account_error)
     LaunchedEffect(Unit) {
         viewModel.action.collectLatest {
-            if (it is LoginAction.LoginAuthError) {
+            if (it is CreateAccountAction.CreateAccountError) {
                 Toast.makeText(context, invalidCredentialsMessage, Toast.LENGTH_LONG).show()
             }
         }
@@ -46,11 +46,20 @@ fun CreateAccountScreen(
     ) { state ->
         Column(modifier = Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x700))
-            Text(text = stringResource(R.string.create_account_label), style = MaterialTheme.typography.h6)
+            Text(
+                text = stringResource(R.string.create_account_label),
+                style = MaterialTheme.typography.h6
+            )
             Text(text = stringResource(R.string.create_account_action))
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x500))
+            TextField(state = state.firstNameState, onValueChange = viewModel::onFirstNameChange)
+            TextField(state = state.lastNameState, onValueChange = viewModel::onLastNameChange)
             TextField(state = state.emailState, onValueChange = viewModel::onEmailChange)
-            TextField(state = state.passwordState, onValueChange = viewModel::onPasswordChange, visualTransformation = PasswordVisualTransformation())
+            TextField(
+                state = state.passwordState,
+                onValueChange = viewModel::onPasswordChange,
+                visualTransformation = PasswordVisualTransformation()
+            )
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.x200))
             Button(
                 modifier = Modifier.fillMaxWidth(),

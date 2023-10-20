@@ -1,7 +1,8 @@
 package com.rafael.featurebriefing.domain.repository
 
-import com.rafael.core.model.Project
+import com.rafael.core.datasource.model.ProjectRequest
+import com.rafael.core.datasource.model.ProjectResponse
 
 interface ProjectRepository {
-    suspend fun startProject(project: Project) : String
+    suspend fun startProject(project: ProjectRequest): Result<ProjectResponse>
 }

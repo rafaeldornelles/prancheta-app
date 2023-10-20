@@ -1,5 +1,6 @@
 package com.rafael.featurebriefing.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.rafael.baseui.common.BaseViewModel
 import com.rafael.baseui.components.ButtonState
@@ -38,6 +39,7 @@ class BriefingViewModel(
             startProject(form).onSuccess {
                 _action.postEvent(BriefingAction.ProjectCreated(it))
             }.onFailure {
+                Log.e("AAA", it.message.toString())
                 _action.postEvent((BriefingAction.Error(it)))
             }
             setSecondaryLoading(index, false)
