@@ -6,14 +6,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.util.Base64
-import android.util.Base64OutputStream
 import android.util.Log
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.core.graphics.scale
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import kotlin.math.min
 
 fun Context.showDatePicker(
     date: Long,
@@ -49,6 +52,8 @@ fun File.toBase64(maxSize: Int = 1024 * 1024): String {
     val outputStream = ByteArrayOutputStream()
     var bmp = BitmapFactory.decodeFile(this.absolutePath)
     do {
+        val scaleFactor = min(1024.0 / bmp.width, 1.0)
+        bmp = bmp.scale((bmp.width * scaleFactor).toInt(), (bmp.height * scaleFactor).toInt())
         bmp.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
         Log.d("AAAA", outputStream.toByteArray().size.toString())
         bmp = BitmapFactory.decodeByteArray(outputStream.toByteArray(), 0, outputStream.size())

@@ -10,9 +10,9 @@ import com.rafael.core.extensions.toBase64
 import com.rafael.core.model.ConstructionVisitation
 import com.rafael.featureproject.R
 import com.rafael.featureproject.domain.usecase.AddVisitationUseCase
-import java.io.File
-import java.util.*
 import kotlinx.coroutines.launch
+import java.io.File
+import java.util.Date
 
 class AddVisitationViewModel(
     private val projectId: String,
@@ -46,6 +46,7 @@ class AddVisitationViewModel(
 
     fun saveVisitation() {
         uiState.getOrNull()?.let { state ->
+            setLoading()
             viewModelScope.launch {
                 val visitation = ConstructionVisitation(
                     id = null,
@@ -59,6 +60,7 @@ class AddVisitationViewModel(
                     _action.postEvent(AddVisitationAction.VisitationAdded)
                 }.onFailure {
                     _action.postEvent(AddVisitationAction.Error(it))
+                    setSuccess(state)
                 }
             }
         }

@@ -1,9 +1,13 @@
 package com.rafael.prancheta
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.rafael.baseui.theme.PranchetaTheme
@@ -36,14 +40,18 @@ class MainActivity : ComponentActivity() {
                             popUpTo(0)
                         }
                     } else {
+                        Log.e("AAAA", "1")
                         navController.navigate(AuthRoutes.GRAPH_ROUTE) {
                             popUpTo(0)
                         }
                     }
                 }
+                val startDestination: String by remember {
+                    mutableStateOf(if (tokenCache.token == null) AuthRoutes.GRAPH_ROUTE else HomeRoutes.GRAPH_ROUTE)
+                }
                 NavHost(
                     navController = navController,
-                    startDestination = if (tokenCache.token == null) AuthRoutes.GRAPH_ROUTE else HomeRoutes.GRAPH_ROUTE
+                    startDestination = startDestination
                 ) {
                     authGraph(navController)
                     homeGraph(navController, briefingViewModel, projectViewModel)
